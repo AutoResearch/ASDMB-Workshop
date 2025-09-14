@@ -4,6 +4,7 @@
 title: Automated Scientific Discovery of Mind and Brain (ASDMB)
 author: Sebastian Musslick, Jonathan Cohen, Younes Strittmatter
 logo: logo.svg
+copyright: "© 2025"
 
 # Don't execute notebooks during the build
 execute:
