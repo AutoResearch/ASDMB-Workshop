@@ -1,2 +1,2 @@
-# Princeton Automated Scientific Discovery of Mind and Brain Workshop
+# Automated Scientific Discovery of Mind and Brain Workshop
 
