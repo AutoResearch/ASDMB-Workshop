@@ -9,12 +9,22 @@ options:
 chapters:
   - file: content/1-basics/index
     sections:
-    - file: content/1-basics/1-introduction/index
-      sections:
-      - file: content/1-basics/1-introduction/tutorials/1-introduction-to-autora
-    - file: content/1-basics/2-model-construction-and-fitting/index
-      sections:
-      - file: content/1-basics/2-model-construction-and-fitting/tutorials/1-psyneulink
-      - file: content/1-basics/2-model-construction-and-fitting/tutorials/2-integrating-psyneulink-with-autora
+      - file: content/1-basics/1-introduction/index
+        sections:
+          - file: content/1-basics/1-introduction/tutorials/1-introduction-to-autora
+      - file: content/1-basics/2-model-construction-and-fitting/index
+        sections:
+          - file: content/1-basics/2-model-construction-and-fitting/tutorials/1-psyneulink
+          - file: content/1-basics/2-model-construction-and-fitting/tutorials/2-integrating-psyneulink-with-autora
+      - file: content/1-basics/3-experimental-design/index
+        sections:
+          - file: content/1-basics/3-experimental-design/tutorials/1-sweetPea
+          - file: content/1-basics/3-experimental-design/tutorials/2-sweetBean
+          - file: content/1-basics/3-experimental-design/tutorials/3-integrating-double-sweet-with-autora
+      - file: content/1-basics/4-experimental-sampling/index
+        sections:
+          - file: content/1-basics/4-experimental-sampling/tutorials/1-sampling-methods
+          - file: content/1-basics/4-experimental-sampling/tutorials/2-integrating-a-sampler-with-autora
+
   - file: content/2-automated-model-discovery/index
 
