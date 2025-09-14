@@ -1,0 +1,1 @@
+# Automated Model Discovery and LLMs for Science

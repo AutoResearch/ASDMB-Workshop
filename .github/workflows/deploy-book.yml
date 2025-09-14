@@ -1,0 +1,45 @@
+name: deploy-book
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: write  # required for gh-pages deploy
+
+concurrency:
+  group: deploy-book
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install jupyter-book
+
+      # If your book is in a subfolder, cd into it or change the path after 'build'
+      - name: Build the book
+        run: |
+          jupyter-book build ASDMB-book --builder html -W --keep-going
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./ASDMB-book/_build/html
+          force_orphan: true

@@ -1,0 +1,20 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: content/index
+options:
+  numbered: true
+
+chapters:
+  - file: content/1-basics/index
+    sections:
+    - file: content/1-basics/1-introduction/index
+      sections:
+      - file: content/1-basics/1-introduction/tutorials/1-introduction-to-autora
+    - file: content/1-basics/2-model-construction-and-fitting/index
+      sections:
+      - file: content/1-basics/2-model-construction-and-fitting/tutorials/1-psyneulink
+      - file: content/1-basics/2-model-construction-and-fitting/tutorials/2-integrating-psyneulink-with-autora
+  - file: content/2-automated-model-discovery/index
+
