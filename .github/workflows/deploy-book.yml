@@ -2,7 +2,7 @@ name: deploy-book
 
 on:
   push:
-    branches: [main, master]
+    branches: [ main, master ]
   workflow_dispatch:
 
 permissions:
@@ -29,7 +29,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install jupyter-book
+
+      - name: Use the build scripts
+        run: bash ASDMB-book/scripts/build.sh
 
       # If your book is in a subfolder, cd into it or change the path after 'build'
       - name: Build the book
