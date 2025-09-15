@@ -210,8 +210,8 @@ def minutes_to_hm(m: int) -> str:
 
 # ---------- table builder ----------
 def build_overview_grid(items_for_week: list[dict], days_list: list[date]) -> list[str]:
-    """Build an HTML timetable (Mon–Fri columns, 30-min rows) and add kind classes to <td>."""
-    dates = [d.isoformat() for d in days_list]  # fixed Mon–Fri columns
+    """Build an HTML timetable (Mon–Fri columns, 30-min rows) and add kind/segment classes to <td>."""
+    dates = [d.isoformat() for d in days_list]
     slots = compute_time_slots(items_for_week)
 
     # index by (date_iso, slot_start_min) -> items overlapping
@@ -227,18 +227,30 @@ def build_overview_grid(items_for_week: list[dict], days_list: list[date]) -> li
 
     def kind_classes(items_here: list[dict]) -> str:
         kinds = { (it.get("kind") or "").lower() for it in items_here }
-        # attach all kind-* classes present; CSS can decide priority
         return " ".join(sorted(f"kind-{k}" for k in kinds if k))
+
+    def seg_class(items_here: list[dict], s: int) -> str:
+        starters = [it for it in items_here if it["_start_min"] == s]
+        enders   = [it for it in items_here if it["_end_min"] == s + 30]
+        # single-slot if the only item here starts and ends in this slot
+        if len(items_here) == 1 and starters and enders:
+            return "seg-single"
+        if starters and enders:
+            # mixed case (overlap): mark both; CSS can handle both present
+            return "seg-start seg-end"
+        if starters:
+            return "seg-start"
+        if enders:
+            return "seg-end"
+        return "seg-mid"
 
     lines = []
     lines.append('<table class="schedule">')
-    # thead
     lines.append("<thead>")
     head_cells = ["<th class='time'>Time</th>"] + [f"<th>{fmt_day(d)}</th>" for d in dates]
     lines.append("<tr>" + "".join(head_cells) + "</tr>")
     lines.append("</thead>")
 
-    # tbody
     lines.append("<tbody>")
     for s in slots:
         row = [f"<th class='time'>{minutes_to_hm(s)}</th>"]
@@ -248,54 +260,53 @@ def build_overview_grid(items_for_week: list[dict], days_list: list[date]) -> li
                 row.append("<td class='slot'>&nbsp;</td>")
                 continue
 
-            td_classes = f"slot {kind_classes(items_here)}"
+            td_classes = f"slot {kind_classes(items_here)} {seg_class(items_here, s)}"
 
-            # label(s) only for items that START in this slot; continuations = empty (color still on <td>)
             starters = [it for it in items_here if it["_start_min"] == s]
             if starters:
                 labels = []
                 for it in starters:
                     title  = md_escape(it.get("title", "").strip())
                     spk    = md_escape(it.get("speaker", "").strip())
-                    kind = it.get("kind", "").strip()
+                    kind   = (it.get("kind") or "").strip()
                     anchor = it["id"]
-                    if kind == 'Break' or kind == 'Dinner':
-                        label_html = f'{spk}'
+                    if kind.lower() == "break" or kind.lower() == "dinner":
+                        label_html = spk or ""
                     else:
                         label_html = f'<a href="#{anchor}">{title}</a>' + (f" ({spk})" if spk else "")
-
                     labels.append(f"<div class='label'>{label_html}</div>")
                 row.append(f"<td class='{td_classes}'>" + "".join(labels) + "</td>")
             else:
-                # continuation cell: no text, just colored background
                 row.append(f"<td class='{td_classes}'>&nbsp;</td>")
         lines.append("<tr>" + "".join(row) + "</tr>")
     lines.append("</tbody>")
     lines.append("</table>")
-    lines.append("")  # final newline for safety
+    lines.append("")
     return lines
 
 
 # ---------- details ----------
 def build_details(items_all: list[dict]) -> list[str]:
+    # group by kind (lectures then tutorials) then by date
+    items_all = sorted(items_all, key=lambda it: (it.get("kind", ""), it.get("date", ""), it.get("_start_min", 0)))
     lines: list[str] = []
-    lines += ["## Talk details", ""]
     for date_key, group in itertools.groupby(items_all, key=lambda x: x.get("date", "")):
-        lines += [f"### {fmt_day(date_key)}", ""]
+        # lines += [f"### {fmt_day(date_key)}", ""]
         for it in group:
             anchor = it["id"]
             title  = md_escape(it.get("title", ""))
             spk    = md_escape(it.get("speaker", ""))
-            time   = it.get("time", "") or ""
-            room   = it.get("room")
+            #time   = it.get("time", "") or ""
+            # room   = it.get("room")
             kind   = it.get("kind", "")
             if kind == "Break":
                 continue
-            room_txt = f" · Room {room}" if room else ""
+            lines += '<hr>', ""
+            # room_txt = f" · Room {room}" if room else ""
             lines += [f"({anchor})=", ""]
-            lines += [f"#### {time} · {title}" + (f" — {spk}" if spk else ""), ""]
-            lines += [f"**Type:** {kind}  ",
-                      f"**When:** {date_key} · {time}{room_txt}", ""]
+            lines += [f"#### {spk} : {title}"]
+            # lines += [f"**Type:** {kind}  ",
+            #           f"**When:** {date_key} · {time}{room_txt}", ""]
 
             slides = []
             for key, label in [("slides_pdf", "PDF"), ("slides_pptx", "PowerPoint"), ("slides_html", "HTML")]:
@@ -334,13 +345,20 @@ def main() -> None:
 
     # Week 1 grid
     w1_mon, w1_fri = w1_range
-    lines += [f"## Overview timetable — Week 1 ({fmt_day(w1_mon)} – {fmt_day(w1_fri)})", ""]
+    lines += [f"## Week 1: Basics",
+              "",
+              "<div class='hint-wrapper'>"
+              "<div class='color-hint lectures'>Lectures</div>"
+              "<div class='color-hint practical'>Practical Session</div>"
+              "<div class='color-hint break'>Coffee/Dinner</div>"
+              "</div>",
+              ""]
     lines += build_overview_grid(w1_items, w1_days) if w1_items else ["_No sessions in Week 1._", ""]
 
     # Week 2 grid
     if w2_items:
         w2_mon, w2_fri = w2_range
-        lines += [f"## Overview timetable — Week 2 ({fmt_day(w2_mon)} – {fmt_day(w2_fri)})", ""]
+        lines += [f"## Week 2: Model Discovery and LLMs", ""]
         lines += build_overview_grid(w2_items, w2_days)
 
     # Details (show everything, including any items outside the two Mon–Fri weeks)
