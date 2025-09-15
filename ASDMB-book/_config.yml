@@ -38,4 +38,7 @@ launch_buttons:
 # Auto number chapters
 numbered: true
 
+sphinx:
+  config:
+    bibtex_reference_style: author_year
 
