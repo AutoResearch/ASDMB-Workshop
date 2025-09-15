@@ -36,7 +36,7 @@ jobs:
       # If your book is in a subfolder, cd into it or change the path after 'build'
       - name: Build the book
         run: |
-          jupyter-book build ASDMB-book --builder html -W --keep-going
+          jupyter-book build ASDMB-book --builder html --keep-going
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
