@@ -3,10 +3,9 @@
 
 format: jb-book
 root: content/index
-options:
-  numbered: true
 
 chapters:
+  - file: content/schedule
   - file: content/1-basics/index
     sections:
       - file: content/1-basics/1-introduction/index

@@ -1,0 +1,241 @@
+talks:
+  - id: sebastian-musslick
+    date: 2025-09-23
+    time: "17:00–19:00"
+    title: "Introduction to Automated Scientific Discovery"
+    speaker: "Sebastian Musslick"
+    video: ""
+    abstract: >
+      Short abstract here.
+    readings:
+      - title: "AutoRA Paper"
+        url: "https://psyarxiv.com/3y5bk/"
+
+
+  - id: nathaniel-daw
+    date: "2025-09-24"
+    time: "16:30–17:30"
+    title: "To be announced"
+    speaker: "Nathaniel Daw"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: jon-cohen
+    date: "2025-09-24"
+    time: "18:00–18:30"
+    title: "Constructing and Fitting Computational Models of Mind and Brain With PsyNeuLink"
+    speaker: "Jonathan D. Cohen"
+    video: ""
+    abstract: >
+      Short abstract here.
+  
+  - id: matthew-flatt
+    date: "2025-09-25"
+    time: "16:30–17:00"
+    title: "Automated Experimental Design With SweetPea"
+    speaker: "Matthew Flatt"
+    video: ""
+    abstract: >
+      Short abstract here
+
+  - id: marina-dubova
+    date: "2025-09-26"
+    time: "16:30–17:00"
+    title: "Against theory-motivated experimentation in science"
+    speaker: "Marina Dubova"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: tom-griffiths
+    date: "2025-09-26"
+    time: "18:00–18:30"
+    title: "Integrative Experimental Design"
+    speaker: "Tom Griffiths"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: nathan-kutz
+    date: "2025-09-29"
+    time: "17:00–19:00"
+    title: "Sparse Identification of Non-Linear Dynamics"
+    speaker: "Nathan Kutz"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: marcello-mattar
+    date: "2025-09-30"
+    time: "16:30–17:00"
+    title: "Knowledge Distillation with Tiny-RNNs"
+    speaker: "Marcello Mattar"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: kevin-miller-disentangled-rnns
+    date: "2025-09-30"
+    time: "17:00–17:30"
+    title: "Cognitive model discovery via disentangled RNNs"
+    speaker: "Kevin Miller"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: kyle-lafollette
+    date: "2025-09-30"
+    time: "18:00–18:30"
+    title: "Equation Discovery in Reinforcement Learning"
+    speaker: "Kyle LaFollette"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: daniel-weinhardt
+    date: "2025-09-30"
+    time: "18:30–19:00"
+    title: "Sparse Identification of Cognitive Equations"
+    speaker: "Daniel Weinhardt"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: kevin-miller-symbolic
+    date: "2025-10-01"
+    time: "16:30–17:00"
+    title: "Discovering symbolic cognitive models from behavior"
+    speaker: "Kevin Miller"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: milena-rmus
+    date: "2025-10-01"
+    time: "17:00–17:30"
+    title: "Generating computational cognitive models using LLMs"
+    speaker: "Milena Rmus, Akshay Kumar Jagadish"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: victoria-bosch
+    date: "2025-10-01"
+    time: "18:30–19:00"
+    title: "CorText: From visually evoked brain responses to text captions"
+    speaker: "Victoria Bosch"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: marcel-binz
+    date: "2025-10-02"
+    time: "16:30–17:00"
+    title: "Centaur: A foundation Model of Cognition"
+    speaker: "Marcel Binz"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: alessandra-brondetta
+    date: "2025-10-02"
+    time: "17:00–17:30"
+    title: "Synthetic Participant: Using LLMs to Generate Human-like Behavioral Data"
+    speaker: "Alessandra Brondetta"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: peter-clark
+    date: "2025-10-02"
+    time: "18:00–18:30"
+    title: "LLMs for Multi-Agent Scientific Discovery"
+    speaker: "Peter Clark"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+  - id: martyna-plomecka
+    date: "2025-10-02"
+    time: "18:30–19:00"
+    title: "LLMs for Automated Datascience"
+    speaker: "Martyna Plomecka"
+    video: ""
+    abstract: >
+      Short abstract here.
+
+tutorials:
+    - id: introduction-to-autora
+      date: "2025-09-23"
+      time: "20:00–21:00"
+      title: "Introduction to AutoRA"
+      speaker: "Younes Strittmatter"
+
+    - id: integrating-psyneulink-with-autora
+      date: "2025-09-24"
+      time: "20:00–21:00"
+      title: "PsyNeuLink"
+      speaker: "Younes Strittmatter"
+
+    - id: integrating-psyneulink-with-autora
+      date: "2025-09-24"
+      time: "20:00–21:00"
+      title: "Integrating PsyNeuLink with AutoRA"
+      speaker: "Younes Strittmatter"
+
+    - id: sweetpea
+      date: "2025-09-25"
+      time: "17:00–17:30"
+      title: "SweetPea"
+      speaker: "Younes Strittmatter"
+
+    - id: sweetbean
+      date: "2025-09-25"
+      time: "18:00–19:00"
+      title: "SweetBean"
+      speaker: "Younes Strittmatter"
+
+    - id: integrating-double-sweet-with-autora
+      date: "2025-09-25"
+      time: "20:00–21:00"
+      title: "Integrating Web-Based Experiments with AutoRA"
+      speaker: "Younes Strittmatter"
+
+    - id: sampling-methods
+      date: "2025-09-26"
+      time: "18:30–19:00"
+      title: "Sampling Methods"
+      speaker: "Younes Strittmatter"
+
+    - id: closing-the-loop-building-your-own-closed-loop-study
+      date: "2025-09-26"
+      time: "20:00–21:00"
+      title: "Closing the Loop: Integrating Samplers"
+      speaker: "Younes Strittmatter"
+
+    - id: dynamical-system-discovery-with-sindy
+      date: "2025-09-29"
+      time: "20:00–21:00"
+      title: "Dynamical System Discovery with SINDy"
+      speaker: "Lukas Stelz & Se-Eun Choi"
+
+    - id: cognitive-model-discovery-with-spice
+      date: "2025-09-30"
+      time: "20:00–21:00"
+      title: "Cognitive Model Discovery with SPICE"
+      speaker: "Daniel Weinhardt & Muhip Teczan"
+
+    - id: computational-cognitive-models-using-llms
+      date: "2025-10-01"
+      time: "20:00–21:00"
+      title: "Computational Cognitive Models using LLMs"
+      speaker: "Milena Rmus & Akshay Kumar Jagadish"
+
+    - id: synthetic-participants-using-llms
+      date: "2025-10-02"
+      time: "20:00–21:00"
+      title: "LLMs as Synthetic Participants"
+      speaker: "Younes Strittmatter"
+
+  

@@ -1,0 +1,16 @@
+/* Layout */
+table.schedule { table-layout: fixed; width: 100%; border-collapse: collapse; }
+table.schedule th, table.schedule td { vertical-align: top; padding: .35rem .5rem; }
+
+/* Time column */
+table.schedule th.time { white-space: nowrap; width: 6.5rem; }
+
+/* Full-cell color via td classes */
+td.slot.kind-tutorial { background: #ecfeff; } /* tutorials */
+td.slot.kind-talk     { background: #eef2ff; } /* talks */
+td.slot.kind-break    { background: #fef9c3; } /* coffee/breaks */
+td.slot.kind-dinner   { background: #ffe4e6; } /* dinner */
+
+/* Labels (first-slot text) */
+table.schedule .label a { text-decoration: none; color: inherit; }
+table.schedule .label a:hover { text-decoration: underline; }
