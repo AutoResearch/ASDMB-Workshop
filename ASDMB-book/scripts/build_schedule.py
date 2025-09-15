@@ -208,6 +208,13 @@ def minutes_to_hm(m: int) -> str:
     h, mm = divmod(m, 60)
     return f"{h:02d}:{mm:02d}"
 
+def split_names(s: str) -> list[str]:
+    import re
+    if not s:
+        return []
+    parts = re.split(r"\s*(?:,| & | and )\s*", s)
+    return [p for p in (p.strip() for p in parts) if p]
+
 # ---------- table builder ----------
 def build_overview_grid(items_for_week: list[dict], days_list: list[date]) -> list[str]:
     """Build an HTML timetable (Mon–Fri columns, 30-min rows) and add kind/segment classes to <td>."""
@@ -295,18 +302,28 @@ def build_details(items_all: list[dict]) -> list[str]:
         for it in group:
             anchor = it["id"]
             title  = md_escape(it.get("title", ""))
-            spk    = md_escape(it.get("speaker", ""))
-            #time   = it.get("time", "") or ""
-            # room   = it.get("room")
-            kind   = it.get("kind", "")
+
+            spk_raw = it.get("speaker", "") or ""
+
+            names = split_names(spk_raw)
+
+            spk_links = " · ".join(
+                f"<a href='speakers.html#speaker-{slugify(n)}'>{md_escape(spk_raw)}</a>" if n else "" for n in names
+            )
+
+            kind = it.get("kind", "")
             if kind == "Break":
                 continue
-            lines += '<hr>', ""
-            # room_txt = f" · Room {room}" if room else ""
-            lines += [f"({anchor})=", ""]
-            lines += [f"#### {spk} : {title}"]
-            # lines += [f"**Type:** {kind}  ",
-            #           f"**When:** {date_key} · {time}{room_txt}", ""]
+
+             # fix: list, not tuple
+            lines += [f"({anchor})=", ""]  # MyST anchor for the talk
+            title_esc = md_escape(title)
+            if spk_links:
+                lines += [f"#### {spk_links} : {title_esc}", ""]
+            else:
+                # Fallback if no speaker names
+                spk_esc = md_escape(spk_raw)
+                lines += [f"#### {spk_esc} : {title_esc}", ""]
 
             slides = []
             for key, label in [("slides_pdf", "PDF"), ("slides_pptx", "PowerPoint"), ("slides_html", "HTML")]:
@@ -326,6 +343,7 @@ def build_details(items_all: list[dict]) -> list[str]:
 
             if it.get("abstract"):
                 lines += ["**Abstract:**", it["abstract"], ""]
+            lines += ["<hr>", ""]
         lines += [""]
     return lines
 

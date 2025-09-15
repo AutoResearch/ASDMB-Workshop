@@ -10,3 +10,4 @@ command -v python3 >/dev/null 2>&1 || PY=python
 
 # Run the generator
 "$PY" "$SCRIPT_DIR/build_schedule.py"
+"$PY" "$SCRIPT_DIR/build_speakers.py"

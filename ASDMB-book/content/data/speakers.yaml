@@ -1,0 +1,17 @@
+speakers:
+  - id: sebastian-musslick
+    name: Sebastian Musslick
+    affiliation: Princeton University
+    website: https://example.org
+    photo: ../images/speakers/sebastian-musslick.jpg
+    bio: Short 2–3 sentence bio here.
+    aliases: [Sebastian Musslick]
+
+  - id: jonathan-cohen
+    name: Jonathan D. Cohen
+    affiliation: Princeton Neuroscience Institute
+    website: https://example.org
+    photo: ../images/speakers/jonathan-cohen.jpg
+    bio: Short bio here.
+    aliases: [Jonathan Cohen, Jon Cohen]
+

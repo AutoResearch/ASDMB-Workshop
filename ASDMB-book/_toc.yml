@@ -6,6 +6,7 @@ root: content/index
 
 chapters:
   - file: content/schedule
+  - file: content/speakers
   - file: content/1-basics/index
     sections:
       - file: content/1-basics/1-introduction/index

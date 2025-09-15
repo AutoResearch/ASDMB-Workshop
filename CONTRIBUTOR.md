@@ -34,13 +34,19 @@ jupyter-book clean ASDMB-book --all
 
 ## Contributing
 
-### Schedule
-
-If you want to change the content of the schedule, please update `ASDMB_book/content/schedule.yampl`. The ids have to match the corresponding folders in `ASDMB_book/content/presentations`. In the folders, you can add slides (pdf or pptx).
-
 To contribute to the book, most of the time you will only need to edit files in the `ASDMB_book/content` directory. You can add new chapters and sections, or modify existing ones. The book is written in Markdown and Jupyter Notebooks for the tutorials.
 
 You might also have to modify the `ASDMB_book/_toc.yml` file to update the table of contents.
+
+### Schedule
+
+If you want to change the content of the schedule, please update `ASDMB_book/content/data/schedule.yampl`. The ids have to match the corresponding folders in `ASDMB_book/content/presentations`. In the folders, you can add slides (pdf or pptx).
+
+
+### Speakers 
+
+If you want to change the content of the speakers page, please update `ASDMB_book/content/data/speakers.yaml`. If you match names with the names provided in schedule.yaml, the links to the talks will be generated automatically. 
+
 
 ## Please follow these guidelines when contributing:
 
