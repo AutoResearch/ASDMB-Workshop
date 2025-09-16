@@ -14,7 +14,7 @@ talks:
 
   - id: nathaniel-daw
     date: "2025-09-24"
-    time: "16:30–17:30"
+    time: "16:30–17:00"
     title: "To be announced"
     speaker: "Nathaniel Daw"
     video: ""
@@ -23,7 +23,7 @@ talks:
 
   - id: jon-cohen
     date: "2025-09-24"
-    time: "18:00–18:30"
+    time: "17:00–17:30"
     title: "Constructing and Fitting Computational Models of Mind and Brain With PsyNeuLink"
     speaker: "Jonathan D. Cohen"
     video: ""
@@ -122,7 +122,7 @@ talks:
 
   - id: victoria-bosch
     date: "2025-10-01"
-    time: "18:30–19:00"
+    time: "18:00–18:30"
     title: "CorText: From visually evoked brain responses to text captions"
     speaker: "Victoria Bosch"
     video: ""
@@ -131,7 +131,7 @@ talks:
 
   - id: marcel-binz
     date: "2025-10-02"
-    time: "16:30–17:00"
+    time: "18:30–19:00"
     title: "Centaur: A foundation Model of Cognition"
     speaker: "Marcel Binz"
     video: ""
@@ -171,10 +171,11 @@ tutorials:
       time: "20:00–21:00"
       title: "Introduction to AutoRA"
       speaker: "Younes Strittmatter"
+      link: "./practical-sessions/introduction-to-autora/index.html"
 
-    - id: integrating-psyneulink-with-autora
+    - id: psyneulink
       date: "2025-09-24"
-      time: "20:00–21:00"
+      time: "18:00–19:00"
       title: "PsyNeuLink"
       speaker: "Younes Strittmatter"
 

@@ -1,5 +1,0 @@
-# Experimental Design
-
-
-
-## Additional Resources

@@ -279,6 +279,9 @@ def build_overview_grid(items_for_week: list[dict], days_list: list[date]) -> li
                     anchor = it["id"]
                     if kind.lower() == "break" or kind.lower() == "dinner":
                         label_html = spk or ""
+                    elif kind.lower() == "tutorial" and it.get("link"):
+                        link = it.get("link")
+                        label_html = f'<a href="{link}">{title}</a>' + (f" ({spk})" if spk else "")
                     else:
                         label_html = f'<a href="#{anchor}">{title}</a>' + (f" ({spk})" if spk else "")
                     labels.append(f"<div class='label'>{label_html}</div>")
@@ -300,19 +303,20 @@ def build_details(items_all: list[dict]) -> list[str]:
     for date_key, group in itertools.groupby(items_all, key=lambda x: x.get("date", "")):
         # lines += [f"### {fmt_day(date_key)}", ""]
         for it in group:
+
             anchor = it["id"]
             title  = md_escape(it.get("title", ""))
-
             spk_raw = it.get("speaker", "") or ""
-
             names = split_names(spk_raw)
-
             spk_links = " · ".join(
                 f"<a href='speakers.html#speaker-{slugify(n)}'>{md_escape(spk_raw)}</a>" if n else "" for n in names
             )
 
             kind = it.get("kind", "")
             if kind == "Break":
+                continue
+
+            if kind == "Tutorial" and it.get("link"):
                 continue
 
              # fix: list, not tuple
