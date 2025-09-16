@@ -1,0 +1,179 @@
+/* Layout */
+table.schedule {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #4E4E4E;
+}
+
+table.schedule th, table.schedule td {
+    vertical-align: top;
+    padding: .3rem .3rem;
+}
+
+table.schedule th.time {
+    white-space: nowrap;
+    width: 8.5rem;
+}
+
+/* Full-cell background via td class */
+td.slot.kind-tutorial {
+    background: #fff2cc;
+}
+
+/* tutorials */
+td.slot.kind-talk {
+    background: #cfe2f2;
+}
+
+/* talks */
+td.slot.kind-break {
+    background: #d8ead3;
+}
+
+/* coffee/breaks */
+td.slot.kind-dinner {
+    background: #d8ead3;
+}
+
+/* dinner */
+
+
+/* ---- Borders that outline each block across its duration ---- */
+td.slot {
+    border: 0;
+}
+
+/* vertical sides present on all segments */
+td.slot {
+    border-left-style: solid;
+    border-right-style: solid;
+    border-left-width: 1px;
+    border-right-width: 1px;
+}
+
+/* top border only where a block begins (or is single-slot) */
+td.slot.seg-start,
+td.slot.seg-single {
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+thead th {
+    border: solid 1px #4E4E4E;
+}
+
+/* bottom border only where a block ends (or is single-slot) */
+td.slot.seg-end,
+td.slot.seg-single {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+
+}
+
+/* Border colors by kind (order sets priority if multiple kinds overlap) */
+td.slot.kind-tutorial.seg-start,
+td.slot.kind-tutorial.seg-mid,
+td.slot.kind-tutorial.seg-end,
+td.slot.kind-tutorial.seg-single {
+    border-color: #4E4E4E; /* a bit darker than bg */
+}
+
+td.slot.kind-talk.seg-start,
+td.slot.kind-talk.seg-mid,
+td.slot.kind-talk.seg-end,
+td.slot.kind-talk.seg-single {
+    border-color: #4E4E4E;
+}
+
+td.slot.kind-break.seg-start,
+td.slot.kind-break.seg-mid,
+td.slot.kind-break.seg-end,
+td.slot.kind-break.seg-single {
+    border-color: #4E4E4E;
+}
+
+td.slot.kind-dinner.seg-start,
+td.slot.kind-dinner.seg-mid,
+td.slot.kind-dinner.seg-end,
+td.slot.kind-dinner.seg-single {
+    border-color: #4E4E4E;
+}
+
+/* Labels in starting cells */
+table.schedule .label a {
+    text-decoration: none;
+    color: inherit;
+}
+
+table.schedule .label a:hover {
+    text-decoration: underline;
+}
+
+
+/* Time column */
+table.schedule th.time {
+    white-space: nowrap;
+    width: 6.5rem;
+    border: 1px solid #4E4E4E;
+    background: #f4f4f4;
+    text-align: right;
+    padding-right: .5rem;
+}
+
+/* Full-cell color via td classes */
+
+
+.label {
+    font-style: italic;
+    font-size: 9pt;
+    line-height: 12pt;
+}
+
+table.schedule .label a {
+    font-style: normal;
+    font-size: 10pt;
+    line-height: 12pt;
+    font-weight: bold;
+    display: block;
+    margin-bottom: .25rem;
+    cursor: pointer
+}
+
+table.schedule .label a:hover {
+    text-decoration: underline;
+    color: purple;
+}
+
+
+table.schedule .label a::before {
+    content: "➪";
+    font-weight: 700;
+    opacity: .6;
+    margin-left: .2rem;
+}
+
+.hint-wrapper {
+  display: flex;
+  justify-content: space-around; /* or: space-around | space-evenly */
+  align-items: center;             /* vertical alignment */
+    margin-bottom: 12px;
+}
+
+.color-hint {
+    padding: 2px 20px;
+    border-radius: 1px;
+    border: 1px solid #4E4E4E;
+}
+
+.color-hint.lectures {
+    background: #cfe2f2;
+}
+
+.color-hint.practical {
+    background: #fff2cc;
+}
+
+.color-hint.break {
+    background: #d8ead3;
+}
