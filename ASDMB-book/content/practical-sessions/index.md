@@ -6,25 +6,23 @@
 
 ### Overview
 
-We’ll implement a task-switching experiment using the [Gilbert & Shallice](https://doi.org/10.1006/cogp.2001.0770) model as the guiding theory. By the end, you’ll have a loop that:
+We’ll implement a stroop experiment using a similar model as in [Cohen & Huston](https://books.google.com/books?hl=de&lr=&id=cOAmbT3ORLcC&oi=fnd&pg=PA453&dq=cohen+%26+huston+1994&ots=nguFNK-b7W&sig=DdKsbgaUPawQbckBjMU-52ODt1M#v=onepage&q&f=false) model as the guiding theory. By the end, you’ll have a loop that:
 1) proposes experimental conditions from theory
 2) collects data from human participants online, and
 3) updates / fits the model
 
-### Tutorial Structure
+## Logistics
 
-We will build a full project in a GitHub repo
-
-If possible, we will use Colab Tutorials to demonstrate usage.
-
-At the end of the session, I will show how to integrate the code into our AutoRA project.
+- *Earlier* (before 7:00 pm) Tutorials on *Tools* (Standalone PsyNeuLink, SweetPea, SweetBean)
+- *Late* (after 20:00 pm) Tutorials on *AutoRA Integration*
+- *Office Hours*: I'm here in front of A32 or in my office, second floor 23.
 
 
 ### Prerequisites
 
-- Python 3.11 (or Colab)
+- Google Account (for Colab and Firebase)
+- GitHub Account (recommended, for accessing code and Codespaces)
 - Basic familiarity with Python
-- Basic familiarity with GitHub
 
 ### Content
 
