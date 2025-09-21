@@ -9,14 +9,14 @@ The purpose of PsyNeuLink is to make it as easy as possible to create new and/or
 ## Presentation
 
 <p>
-  <a href="../../../practical-sessions/psyneulink/slides/talk.html"
+  <a href="../../../practical-sessions/psyneulink/slides/index.html"
      target="_blank" rel="noopener">
     ▶️ Open slides full screen
   </a>
 </p>
 
 <iframe
-  src="../../../practical-sessions/psyneulink/slides/talk.html"
+  src="../../../practical-sessions/psyneulink/slides/index.html"
   width="100%" height="720" style="border:0;"
   allow="fullscreen"
   allowfullscreen>
