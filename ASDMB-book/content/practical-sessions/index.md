@@ -21,7 +21,7 @@ We’ll implement a stroop experiment using a similar model as in [Cohen & Husto
 ### Prerequisites
 
 - Google Account (for Colab and Firebase)
-- GitHub Account (recommended, for accessing code and Codespaces)
+- GitHub Account (recommended, for accessing code and CodeSpaces)
 - Basic familiarity with Python
 
 ### Content
@@ -31,7 +31,7 @@ We’ll implement a stroop experiment using a similar model as in [Cohen & Husto
 :titlesonly:
 
 introduction-to-autora/index
-psyneulink/index
+psyneulink/psyneulink
 sweetpea/index
 sweetbean/index
 autora

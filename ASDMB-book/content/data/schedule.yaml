@@ -178,6 +178,7 @@ tutorials:
       time: "18:00–19:00"
       title: "PsyNeuLink"
       speaker: "Younes Strittmatter"
+      link: "./practical-sessions/psyneulink/index.html"
 
     - id: integrating-psyneulink-with-autora
       date: "2025-09-24"

@@ -26,9 +26,12 @@ sphinx:
     - custom.css
     - css/schedule.css
   config:
+    html_extra_path:
+      - content/external
     html_theme: pydata_sphinx_theme
     # theme options
     html_theme_options:
+
       logo:
         text: "ASDMB"
       show_nav_level: 2            # show chapters + sections in sidebar
