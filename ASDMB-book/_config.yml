@@ -4,8 +4,7 @@ logo: _static/logo.svg
 favicon: _static/logo.svg
 copyright: "© 2025"
 
-execute:
-  execute_notebooks: "off"     # keep CI fast & predictable
+   # keep CI fast & predictable
 
 
 repository:
@@ -17,9 +16,7 @@ html:
   theme: pydata_sphinx_theme    # important: works fine set here for Jupyter Book
   use_repository_button: true
 
-launch_buttons:
-  colab_url: "https://colab.research.google.com"
-  notebook_interface: "classic"
+
 
 sphinx:
   extra_css:
@@ -29,6 +26,7 @@ sphinx:
     html_extra_path:
       - content/external
     html_theme: pydata_sphinx_theme
+
     # theme options
     html_theme_options:
 
