@@ -4,4 +4,4 @@ Here, we will introduce you to AutoRA by walking through a simple example of how
 
 get started:
 
-[Template Repository](https://github.com/younesStrittmatter/ASDMB-Tutorial-Basics)
+[Template Repository](https://github.com/younesStrittmatter/ASDMB-workshop-basic-github-hosting)
