@@ -23,7 +23,7 @@
 
 ## SweetBean Data
 
-<a href="https://github.com/AutoResearch/ASDMB-Workshop/blob/content/practical-sessions/experimental-design//data.csv" download>Download CSV</a>
+<a href="https://github.com/AutoResearch/ASDMB-Workshop/blob/ASDMB-book/content/external/practical-sessions/experimental-design/sample.csv" download>Download CSV</a>
 
 
 ## Additional Resources
