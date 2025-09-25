@@ -21,7 +21,7 @@
 
 - [Double Sweet](double-sweet-experimental-design.ipynb)
 
-## SweetBean DataFile
+## SweetBean Data
 
 <a href="./../../practical-sessions/experimental-design/sample.csv" download>Download CSV</a>
 <pre>
