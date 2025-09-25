@@ -19,11 +19,11 @@
 
 ## Practical Session
 
-- [Presentation](presentation.ipynb)
+- [Double Sweet](double-sweet-experimental-design.ipynb)
 
 
 ## Additional Resources
 
-- [Cohen & Huston](https://books.google.com/books?hl=de&lr=&id=cOAmbT3ORLcC&oi=fnd&pg=PA453&dq=cohen+%26+huston+1994&ots=nguFNK-b7W&sig=DdKsbgaUPawQbckBjMU-52ODt1M#v=onepage&q&f=false)
-- [PsyNeuLink Documentation](https://princetonuniversity.github.io/PsyNeuLink/)
+- [SweetPea](https://sweetpea.ai/)
+- [SweetBean](https://autoresearch.github.io/sweetbean/)
 
