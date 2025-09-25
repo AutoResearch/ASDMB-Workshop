@@ -1,30 +1,3 @@
-# Experimental Design
-
-
-## Presentation
-
-<p>
-  <a href="../../../practical-sessions/experimental-design/slides/index.html"
-     target="_blank" rel="noopener">
-    ▶️ Open slides full screen
-  </a>
-</p>
-
-<iframe
-  src="../../../practical-sessions/experimental-design/slides/index.html"
-  width="100%" height="720" style="border:0;"
-  allow="fullscreen"
-  allowfullscreen>
-</iframe>
-
-## Practical Session
-
-- [Double Sweet](double-sweet-experimental-design.ipynb)
-
-## SweetBean DataFile
-
-<a href="./../../practical-sessions/experimental-design/sample.csv" download>Download CSV</a>
-<pre>
 ,exp_id,rt.0,stimulus.0,response.0,trial_type.0,trial_index.0,time_elapsed.0,internal_node_id.0,bean_trial_duration.0,bean_duration.0,bean_stimulus.0,bean_choices.0,bean_correct_key.0,bean_type.0,bean_text.0,bean_color.0,bean_correct.0,rt.1,stimulus.1,response.1,trial_type.1,trial_index.1,time_elapsed.1,internal_node_id.1,bean_trial_duration.1,bean_duration.1,bean_stimulus.1,bean_choices.1,bean_correct_key.1,bean_type.1,bean_text.1,bean_color.1,bean_correct.1,rt.2,stimulus.2,response.2,trial_type.2,trial_index.2,time_elapsed.2,internal_node_id.2,bean_trial_duration.2,bean_duration.2,bean_stimulus.2,bean_choices.2,bean_correct_key.2,bean_type.2,bean_text.2,bean_color.2,bean_correct.2
 0,0,,<div style='color:white'>+</div>,,html-keyboard-response,0,804,0.0-0.0-0.0,800,800,<div style='color:white'>+</div>,[],,jsPsychHtmlKeyboardResponse,+,white,False,,<div style='color:green'>GREEN</div>,,html-keyboard-response,1,2807,0.0-0.0-1.0,2000,2000,<div style='color:green'>GREEN</div>,"['f', 'j']",j,jsPsychHtmlKeyboardResponse,GREEN,green,False,,<div style='color:red'>False!</div>,,html-keyboard-response,2,3611,0.0-0.0-2.0,800,800,<div style='color:red'>False!</div>,[],,jsPsychHtmlKeyboardResponse,False!,red,False
 1,0,,<div style='color:white'>+</div>,,html-keyboard-response,3,4415,0.0-0.0-0.1,800,800,<div style='color:white'>+</div>,[],,jsPsychHtmlKeyboardResponse,+,white,False,,<div style='color:green'>RED</div>,,html-keyboard-response,4,6417,0.0-0.0-1.1,2000,2000,<div style='color:green'>RED</div>,"['f', 'j']",j,jsPsychHtmlKeyboardResponse,RED,green,False,,<div style='color:red'>False!</div>,,html-keyboard-response,5,7220,0.0-0.0-2.1,800,800,<div style='color:red'>False!</div>,[],,jsPsychHtmlKeyboardResponse,False!,red,False
@@ -42,12 +15,3 @@
 13,1,,<div style='color:white'>+</div>,,html-keyboard-response,15,18846,0.0-0.0-0.5,800,800,<div style='color:white'>+</div>,[],,jsPsychHtmlKeyboardResponse,+,white,False,,<div style='color:green'>GREEN</div>,,html-keyboard-response,16,20849,0.0-0.0-1.5,2000,2000,<div style='color:green'>GREEN</div>,"['f', 'j']",j,jsPsychHtmlKeyboardResponse,GREEN,green,False,,<div style='color:red'>False!</div>,,html-keyboard-response,17,21652,0.0-0.0-2.5,800,800,<div style='color:red'>False!</div>,[],,jsPsychHtmlKeyboardResponse,False!,red,False
 14,1,,<div style='color:white'>+</div>,,html-keyboard-response,18,22454,0.0-0.0-0.6,800,800,<div style='color:white'>+</div>,[],,jsPsychHtmlKeyboardResponse,+,white,False,,<div style='color:red'>RED</div>,,html-keyboard-response,19,24456,0.0-0.0-1.6,2000,2000,<div style='color:red'>RED</div>,"['f', 'j']",f,jsPsychHtmlKeyboardResponse,RED,red,False,,<div style='color:red'>False!</div>,,html-keyboard-response,20,25258,0.0-0.0-2.6,800,800,<div style='color:red'>False!</div>,[],,jsPsychHtmlKeyboardResponse,False!,red,False
 15,1,,<div style='color:white'>+</div>,,html-keyboard-response,21,26061,0.0-0.0-0.7,800,800,<div style='color:white'>+</div>,[],,jsPsychHtmlKeyboardResponse,+,white,False,,<div style='color:green'>RED</div>,,html-keyboard-response,22,28064,0.0-0.0-1.7,2000,2000,<div style='color:green'>RED</div>,"['f', 'j']",j,jsPsychHtmlKeyboardResponse,RED,green,False,,<div style='color:red'>False!</div>,,html-keyboard-response,23,28867,0.0-0.0-2.7,800,800,<div style='color:red'>False!</div>,[],,jsPsychHtmlKeyboardResponse,False!,red,False
-
-</pre>
-
-
-## Additional Resources
-
-- [SweetPea](https://sweetpea.ai/)
-- [SweetBean](https://autoresearch.github.io/sweetbean/)
-
