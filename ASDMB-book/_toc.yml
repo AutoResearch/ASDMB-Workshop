@@ -9,6 +9,8 @@ chapters:
   - file: content/practical-sessions/index
     sections:
       - file: content/practical-sessions/introduction-to-autora/index
+      - file: content/practical-sessions/psyneulink/index
+      - file: content/practical-sessions/experimental-design/index
   - file: content/speakers
 
 

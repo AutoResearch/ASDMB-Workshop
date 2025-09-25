@@ -32,9 +32,8 @@ We’ll implement a stroop experiment using a similar model as in [Cohen & Husto
 
 introduction-to-autora/index
 psyneulink/psyneulink
-sweetpea/index
-sweetbean/index
-autora
+experimental-design/index
+
 ```
 
 ## Week 2: 
