@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Double Sweet Experimental Design</title>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .dot, #centerMirror {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            font-size: 20px;
+            color: #fff;
+            position: absolute;
+            user-select: none;
+            border-radius: 8px;
+        }
+
+        #fixation {
+            background: #333;
+          line-height: 50px;
+        }
+
+        #stimulus {
+            background: #333;
+        }
+
+        #feedback {
+            background: #333;
+        }
+
+        #soa {
+            background: #333;
+        }
+
+        #centerMirror {
+            background: #111;
+            outline: 2px solid #888;
+            transform: translate(-50%, -50%);
+        }
+
+        .sweet-pea {
+            position: fixed;
+            top: 20px;
+            color: #fff;
+            text-align: center;
+            width: 300px;
+          padding: 20px;
+            transform: translateX(-50%);
+            visibility: hidden;
+            border: 1px solid #555;
+          border-radius: 4px;
+        }
+
+        .sweet-bean {
+          visibility: hidden;
+        }
+        .sweet-bean.label {
+          position: absolute;
+            bottom: 28%;
+            transform: translateY(-100%);
+            right: 10%;
+            font-size: 24px;
+            font-weight: bold;
+
+          color: darkgoldenrod;
+
+        }
+        .sweet-pea.label {
+          position: absolute;
+            top: 5%;
+
+            left: 10%;
+            font-size: 24px;
+            font-weight: bold;
+          border: None;
+
+          color: darkgoldenrod;
+
+        }
+        #first-click {
+          position: absolute;
+          top:50%;
+          left:50%;
+          transform: translate(-50%, -50%);
+          color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<!-- Orbiting items -->
+<div class='dot sweet-bean' id="fixation">+</div>
+<div class='dot sweet-bean' id="stimulus"><span style="color:green">RED</span></div>
+<div class='dot sweet-bean' id="feedback"></div>
+<div class='dot sweet-bean' id="soa"></div>
+<div class="sweet-bean label">SweetBean</div>
+<div class="sweet-pea label">SweetPea</div>
+<!-- Center mirror -->
+<div class="sweet-bean" id="centerMirror"></div>
+<div id="first-click">Click To Start</div>
+
+<script>
+
+    let has_clicked = 0
+
+    window.onclick = () => {
+
+        if (has_clicked === 0) {
+            document.querySelectorAll('.sweet-bean').forEach(el => el.style.visibility = 'visible')
+            document.querySelectorAll('.sweet-pea').forEach(el => el.style.visibility = 'hidden')
+          document.getElementById('first-click').style.display = 'none'
+        }
+        if (has_clicked === 1) {
+            document.querySelectorAll('.sweet-bean').forEach(el => el.style.visibility = 'visible')
+            document.querySelectorAll('.sweet-pea').forEach(el => el.style.visibility = 'visible')
+          document.getElementById('first-click').style.display = 'none'
+        }
+        if (has_clicked === 2) {
+            document.querySelectorAll('.sweet-bean').forEach(el => el.style.visibility = 'hidden')
+            document.querySelectorAll('.sweet-pea').forEach(el => el.style.visibility = 'hidden')
+          document.getElementById('first-click').style.display = 'block'
+        }
+        has_clicked += 1
+        has_clicked %= 3
+    }
+
+    // document.addEventListener('mouseup', () => {
+    //   if (has_clicked === 0) {
+    //     document.querySelectorAll('.sweet-bean').forEach(el => el.style.visibility = 'visible')
+    //     has_clicked = 1
+    //   }
+    //   if (has_clicked === 1) {
+    //     document.querySelectorAll('.sweet-pea').forEach(el => el.style.visibility = 'visible')
+    //     has_clicked = 2
+    //   }
+    // })
+
+    // ------- CONFIG -------
+    const RADIUS = 180;            // circle radius (px)
+
+
+    // ------- SETUP -------
+    const els = {
+        fixation: document.getElementById("fixation"),
+        stimulus: document.getElementById("stimulus"),
+        feedback: document.getElementById("feedback"),
+        soa: document.getElementById("soa"),
+    };
+    const centerMirror = document.getElementById("centerMirror");
+
+
+    const center_x = window.innerWidth / 2;
+    const center_y = 5 * window.innerHeight / 8;
+
+    centerMirror.style.left = center_x + "px";
+    centerMirror.style.top = center_y + "px";
+
+
+    // Utility: position an element at an angle (phi + offset) without rotating the element
+    function drawAtAngle(obj, phi) {
+        const x = center_x - RADIUS * Math.sin(obj.theta_start + phi) - obj.el.offsetWidth / 2;
+        const y = center_y - RADIUS * Math.cos(obj.theta_start + phi) - obj.el.offsetHeight / 2; // minus because screen y grows downward
+        obj.el.style.left = x + "px";
+        obj.el.style.top = y + "px";
+        const theta = (obj.theta_start + phi) % (2 * Math.PI);
+        if (theta < Math.PI / 4 || theta > 7 * Math.PI / 4) {
+            if (obj.name === 'feedback' && !obj.set) {
+                obj.set = true
+                let txt = Math.random() < 0.5 ? '✓' : '✗';
+                let color = txt === '✓' ? '#22c55e' : '#ef4444';
+                obj.el.innerHTML = `<span style="color:${color}">${txt}</span>`;
+            } else if (obj.name !== 'feedback') {
+                obj.el.innerHTML = `${obj.content}`;
+            }
+            obj.el.style.opacity = 1;
+            centerMirror.innerHTML = obj.el.innerHTML;
+            if (obj.name === 'task cue') {
+                centerMirror.style.lineHeight = '50px';
+            } else {
+                centerMirror.style.lineHeight = '100px';
+            }
+        } else {
+            obj.set = false
+            obj.el.innerHTML = `${obj.name}`;
+            obj.el.style.opacity = 0.3;
+        }
+
+    }
+
+    let soa = {
+        name: 'soa',
+        theta_start: -Math.PI / 4,
+        el: document.getElementById('soa'),
+        content: '',
+        duration: 800
+    }
+
+    let fixation = {
+        name: 'task cue',
+        theta_start: 3 * Math.PI / 2 - Math.PI / 4,
+        el: document.getElementById('fixation'),
+        content: '+',
+        set: false,
+        duration: 1400,
+    }
+
+    let stimulus = {
+        name: 'stimulus',
+        theta_start: Math.PI - Math.PI / 4,
+        el: document.getElementById('stimulus'),
+        content: '<span style="color:green">RED</span>',
+        duration: 2500
+    }
+
+    let feedback = {
+        name: 'feedback',
+        theta_start: Math.PI / 2 - Math.PI / 4,
+        el: document.getElementById('feedback'),
+        duration: 1000
+    }
+
+    function drawAll(phi) {
+        drawAtAngle(soa, phi)
+        drawAtAngle(fixation, phi)
+        drawAtAngle(stimulus, phi)
+        drawAtAngle(feedback, phi)
+    }
+
+
+    let start = performance.now()
+    let phi = 0
+
+
+    let trials = []
+    for (let i = 0; i < 21; i++) {
+        let soaDur = Math.random() < 0.5 ? 1000 : 2000
+        let fixDur = 2000
+        let stimDur = 3500
+        let feedDur = 1000
+        let color = Math.random() < 0.5 ? 'green' : 'red'
+        let text = Math.random() < 0.5 ? 'RED' : 'GREEN'
+        let task = Math.random() < 0.5 ? 'color naming' : 'word reading'
+        let stimContent = `<span style="color:${color}">${text}</span>`
+        trials.push([soaDur, fixDur, stimDur, feedDur, stimContent, color, text, task])
+    }
+
+    let currentTrial = 0
+
+    function setTrial() {
+        currentTrial += 1
+        currentTrial %= trials.length
+        let trial = trials[currentTrial]
+        fixation.duration = trial[1]
+        stimulus.duration = trial[2]
+        feedback.duration = trial[3]
+        stimulus.content = trial[4]
+        fixation.content = trial[7]
+        let period = soa.duration + fixation.duration + stimulus.duration + feedback.duration;
+
+
+        window.setTimeout(() => {
+            setTrial()
+        }, period)
+    }
+
+
+    let trialDivs = []
+
+    function initTrialDivs() {
+        for (let i = 0; i < 21; i++) {
+            const div = document.createElement('div');
+            div.innerHTML =
+
+                '<span>COLOR: ' + trials[i][5] + '</span><br>' +
+                '<span>WORD: ' + trials[i][6] + '</span><br>' +
+                '<span>TASK: ' + trials[i][7] + '</span><br>' +
+                '<span>SOA: ' + trials[i][0] + 'ms</span>'
+            document.body.appendChild(div);
+            div.className = 'sweet-pea';
+            trialDivs.push(div)
+        }
+    }
+
+    initTrialDivs()
+
+    function drawTrials(cT, periodPercentage) {
+        // create a list of trials "centered" around the current trial
+
+        for (let i = 0; i < 21; i++) {
+            let div = trialDivs[i]
+            let x_from_center = center_x - 200 + periodPercentage * 400
+            if (i === currentTrial) {
+                div.style.left = x_from_center + 'px';
+                div.style.opacity = '1';
+            } else {
+                let difference = i - currentTrial;
+                div.style.left = x_from_center - difference * 400 + 'px';
+                div.style.opacity = '.3';
+            }
+            //
+            //
+        }
+    }
+
+
+    function loop() {
+
+        let timestamp = performance.now()
+        let elapsedTime = timestamp - start
+        let soaDuration = soa.duration
+        let fixationDuration = fixation.duration
+        let stimulusDuration = stimulus.duration
+        let feedbackDuration = feedback.duration
+        let period = soaDuration + fixationDuration + stimulusDuration + feedbackDuration;
+        let phase = elapsedTime % period;
+        if (phase < soaDuration) {
+            phi = (phase / soaDuration) * Math.PI / 2
+        } else if (phase < soaDuration + fixationDuration) {
+            phi = Math.PI / 2 + ((phase - soaDuration) / fixationDuration) * Math.PI / 2
+        } else if (phase < soaDuration + fixationDuration + stimulusDuration) {
+            phi = Math.PI + ((phase - soaDuration - fixationDuration) / stimulusDuration) * Math.PI / 2
+        } else {
+            phi = 3 * Math.PI / 2 + ((phase - soaDuration - fixationDuration - stimulusDuration) / feedbackDuration) * Math.PI / 2
+        }
+
+        drawAll(phi)
+        drawTrials(currentTrial, phase / period)
+        requestAnimationFrame(loop)
+    }
+
+
+    setTrial(currentTrial)
+
+    loop()
+
+
+</script>
+</body>
+</html>
+`
