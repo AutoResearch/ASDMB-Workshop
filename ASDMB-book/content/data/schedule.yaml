@@ -48,11 +48,17 @@ talks:
     abstract: >
       Short abstract here.
 
-  - id: sampling-methods
+  - id: younes-strittmatter
     date: "2025-09-26"
     time: "17:00–17:30"
     title: "Automated Experiment Sampling"
     speaker: "Younes Strittmatter"
+    video: ""
+    abstract: >
+      Short abstract here.
+    slides_pptx:
+      - Slides: "./presentations/younes-strittmatter/automated-experiment-sampling.pptx"
+
 
   - id: tom-griffiths
     date: "2025-09-26"
@@ -183,32 +189,35 @@ tutorials:
       time: "20:00–21:00"
       title: "Integrating PsyNeuLink with AutoRA"
       speaker: "Younes Strittmatter"
+      link: "./practical-sessions/introduction-to-autora/index.html"
 
     - id: sweetpea
       date: "2025-09-25"
       time: "17:00–17:30"
       title: "SweetPea"
       speaker: "Younes Strittmatter"
+      link: "./practical-sessions/experimental-design/index.html"
 
     - id: sweetbean
       date: "2025-09-25"
       time: "18:00–19:00"
       title: "SweetBean"
       speaker: "Younes Strittmatter"
+      link: "./practical-sessions/experimental-design/index.html"
 
     - id: integrating-double-sweet-with-autora
       date: "2025-09-25"
       time: "20:00–21:00"
       title: "Integrating Web-Based Experiments with AutoRA"
       speaker: "Younes Strittmatter"
-
-
+      link: "./practical-sessions/introduction-to-autora/index.html"
 
     - id: closing-the-loop-building-your-own-closed-loop-study
       date: "2025-09-26"
       time: "20:00–21:00"
       title: "Closing the Loop: Integrating Samplers"
       speaker: "Younes Strittmatter"
+      link: "./practical-sessions/introduction-to-autora/index.html"
 
     - id: dynamical-system-discovery-with-sindy
       date: "2025-09-29"

@@ -27,6 +27,8 @@ import pathlib
 import re
 from datetime import datetime, date, timedelta
 import yaml
+from urllib.parse import quote
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA = ROOT / "content" / "data" / "schedule.yaml"
@@ -34,6 +36,13 @@ OUT  = ROOT / "content" / "schedule.md"
 
 # ---------- time helpers ----------
 TIME_RE = re.compile(r"^\s*(\d{1,2}):(\d{2})\s*$")
+
+
+def add_download_link(title, path):
+    # URL-encode but keep common safe chars
+    url = quote(path, safe="/:#?&.=+()-_")
+    # use HTML so we can add the download attribute
+    return f'<a href="{url}" download>{title}</a>'
 
 def parse_ymd(din) -> date | None:
     if isinstance(din, date):
@@ -171,6 +180,8 @@ def add_breaks(items: list[dict], w1_days, w2_days):
         if d.weekday() != 0:
             if d.weekday() == 1:
                 inject(d, "17:30–18:00", "Coffee", "Break", "coffee")
+            elif d.weekday() == 3:
+                inject(d, "18:00–18:30", "", "Break", "coffee")
             else:
                 inject(d, "17:30–18:00", "", "Break", "coffee")
 
@@ -332,7 +343,16 @@ def build_details(items_all: list[dict]) -> list[str]:
             slides = []
             for key, label in [("slides_pdf", "PDF"), ("slides_pptx", "PowerPoint"), ("slides_html", "HTML")]:
                 if it.get(key):
-                    slides.append(f"[{label}]({it[key]})")
+                    presentations = it.get(key)
+                    for presentation in presentations:
+                        for key, value in presentation.items():
+                            path = value
+                            if path:
+                                slides.append(add_download_link(label, path))
+
+                    # for slides in it.get(key):
+                    #     print(title)
+                    #     # slides.append(add_download_link(title, path))
             if slides:
                 lines += ["**Slides:** " + " · ".join(slides), ""]
 
