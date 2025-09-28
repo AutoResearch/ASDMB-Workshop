@@ -48,9 +48,15 @@ talks:
     abstract: >
       Short abstract here.
 
+  - id: sampling-methods
+    date: "2025-09-26"
+    time: "17:00–17:30"
+    title: "Automated Experiment Sampling"
+    speaker: "Younes Strittmatter"
+
   - id: tom-griffiths
     date: "2025-09-26"
-    time: "18:00–18:30"
+    time: "18:00–19:00"
     title: "Integrative Experimental Design"
     speaker: "Tom Griffiths"
     video: ""
@@ -130,7 +136,7 @@ talks:
       Short abstract here.
 
   - id: marcel-binz
-    date: "2025-10-02"
+    date: "2025-10-01"
     time: "18:30–19:00"
     title: "Centaur: A foundation Model of Cognition"
     speaker: "Marcel Binz"
@@ -138,19 +144,11 @@ talks:
     abstract: >
       Short abstract here.
 
-  - id: alessandra-brondetta
-    date: "2025-10-02"
-    time: "17:00–17:30"
-    title: "Synthetic Participant: Using LLMs to Generate Human-like Behavioral Data"
-    speaker: "Alessandra Brondetta"
-    video: ""
-    abstract: >
-      Short abstract here.
 
   - id: peter-clark
     date: "2025-10-02"
-    time: "18:00–18:30"
-    title: "LLMs for Multi-Agent Scientific Discovery"
+    time: "16:30–18:00"
+    title: "Multi-Agent LLMs for Scientific Discovery"
     speaker: "Peter Clark"
     video: ""
     abstract: >
@@ -204,11 +202,7 @@ tutorials:
       title: "Integrating Web-Based Experiments with AutoRA"
       speaker: "Younes Strittmatter"
 
-    - id: sampling-methods
-      date: "2025-09-26"
-      time: "18:30–19:00"
-      title: "Sampling Methods"
-      speaker: "Younes Strittmatter"
+
 
     - id: closing-the-loop-building-your-own-closed-loop-study
       date: "2025-09-26"
