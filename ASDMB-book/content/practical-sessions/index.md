@@ -37,3 +37,11 @@ experimental-design/index
 ```
 
 ## Week 2: 
+
+```{toctree}
+:maxdepth: 1
+:titlesonly:
+
+sindy/index
+
+```
