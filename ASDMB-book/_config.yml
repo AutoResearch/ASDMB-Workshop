@@ -5,7 +5,8 @@ favicon: _static/logo.svg
 copyright: "© 2025"
 
    # keep CI fast & predictable
-execute_notebooks: "off"
+execute:
+  execute_notebooks: "off"
 
 repository:
   url: https://github.com/AutoResearch/ASDMB-Workshop/
