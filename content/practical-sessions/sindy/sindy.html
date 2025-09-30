@@ -1,0 +1,1166 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dynamical System Discovery with SINDy &#8212; Automated Scientific Discovery of Mind and Brain (ASDMB)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/schedule.css?v=e580d19a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/practical-sessions/sindy/sindy';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/logo.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">ASDMB</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../schedule.html">
+    Schedule
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Practical Sessions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../speakers.html">
+    Speakers
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/younesStrittmatter/princeton-ASDMB" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../schedule.html">
+    Schedule
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Practical Sessions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../speakers.html">
+    Speakers
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/younesStrittmatter/princeton-ASDMB" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Dynamical...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dynamical-system-discovery-with-sindy">
+<h1>Dynamical System Discovery with SINDy<a class="headerlink" href="#dynamical-system-discovery-with-sindy" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><a class="reference external" href="https://colab.research.google.com/github/AutoResearch/ASDMB-Workshop/blob/main/ASDMB-book/content/practical-sessions/sindy/sindy.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+</div></blockquote>
+<p>Run in Colab….</p>
+<section id="introduction-to-sindy">
+<h2>Introduction to SINDy<a class="headerlink" href="#introduction-to-sindy" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Given data <span class="math notranslate nohighlight">\(\hat{x}\)</span> we want to find the analytical expression of the dynamical system <span class="math notranslate nohighlight">\(\dot{x}(t) = f(x(t))\)</span> that best explains the data.</p></li>
+<li><p>For this we have mesurements of all dimensions <span class="math notranslate nohighlight">\(x_1,...,x_n\)</span> for time points <span class="math notranslate nohighlight">\(t_1,...,t_m\)</span></p></li>
+<li><p>These can be put into a martrix
+$<span class="math notranslate nohighlight">\(
+X =
+\begin{bmatrix}
+x_1(t_1) &amp; x_2(t_1) &amp; \cdots &amp; x_n(t_1) \\
+x_1(t_2) &amp; x_2(t_2) &amp; \cdots &amp; x_n(t_2) \\
+\vdots   &amp; \vdots   &amp;        &amp; \vdots   \\
+x_1(t_m) &amp; x_2(t_m) &amp; \cdots &amp; x_n(t_m)
+\end{bmatrix}.
+\)</span>$</p></li>
+<li><p>Using difference quotients <span class="math notranslate nohighlight">\(\dot{x}_k(t_i) \approx \frac{x_k(t_{i+1}) - x_k(t_i)}{t_{i+1} - t_i}\)</span> we can also estimate the left-hand-side of our ode and agragate all these terms into the matrix
+$<span class="math notranslate nohighlight">\(
+\dot{X} =
+\begin{bmatrix}
+\dot{x}_1(t_1) &amp; \dot{x}_2(t_1) &amp; \cdots &amp; \dot{x}_n(t_1) \\
+\dot{x}_1(t_2) &amp; \dot{x}_2(t_2) &amp; \cdots &amp; \dot{x}_n(t_2) \\
+\vdots   &amp; \vdots   &amp;        &amp; \vdots   \\
+\dot{x}_1(t_m) &amp; \dot{x}_2(t_m) &amp; \cdots &amp; \dot{x}_n(t_m)
+\end{bmatrix}.
+\)</span>$</p></li>
+<li><p>We can also set up a library of possible terms, e.g. monomials of order</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Theta(X) =
+\begin{bmatrix}
+\mid &amp; \mid &amp;        &amp; \mid \\
+\theta_1(X) &amp; \theta_2(X) &amp; \cdots &amp; \theta_\ell(X) \\
+\mid &amp; \mid &amp;        &amp; \mid
+\end{bmatrix}.
+\end{split}\]</div>
+<p>For example, if <span class="math notranslate nohighlight">\(\theta_1(x), \theta_2(x), \dots, \theta_\ell(x)\)</span> are monomials
+(<span class="math notranslate nohighlight">\(\theta_i(x) = x^{i-1}\)</span>), then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\theta_3(x) =
+\begin{bmatrix}
+\mid &amp; \mid &amp; &amp; \mid &amp; \mid &amp; &amp; \mid\\
+x_1(t)^2 &amp; x_1(t)x_2(t) &amp; \cdots &amp; x_2(t)^2 &amp; x_2(t)x_3(t) &amp; \cdots &amp; x_n(t)^2\\
+\mid &amp; \mid &amp; &amp; \mid &amp; \mid &amp; &amp; \mid
+\end{bmatrix},
+\end{split}\]</div>
+<p>where vector products and powers are understood to be element-wise.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Xi =
+\begin{bmatrix}
+\mid &amp; \mid &amp; &amp; \mid\\
+\xi_1 &amp; \xi_2 &amp; \cdots &amp; \xi_n\\
+\mid &amp; \mid &amp; &amp; \mid
+\end{bmatrix}.
+\end{split}\]</div>
+<p>Finally, the approximation problem underlying SINDy is</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{X} \approx \Theta(X)\Xi.
+\]</div>
+<section id="install-and-load-packages">
+<h3>Install and Load Packages<a class="headerlink" href="#install-and-load-packages" title="Link to this heading">#</a></h3>
+<p>Run the cells below to install and run everything needed for the rest of the Tutorial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Install necessary packages if running in Colab
+!pip install pysindy matplotlib pandas numpy scipy scikit-learn
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+from sklearn.linear_model import LinearRegression, Lasso
+import pysindy as ps
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="lotka-volterra-model">
+<h2>Lotka-Volterra Model<a class="headerlink" href="#lotka-volterra-model" title="Link to this heading">#</a></h2>
+<p>The Lotka-Volterra model, also called preditor-prey model describes the population size of a preditor population <span class="math notranslate nohighlight">\(y\)</span> and a prey population <span class="math notranslate nohighlight">\(x\)</span> as a mean-field model. The following set of differential equations describes the dynamics of the population sizes:</p>
+<p>\begin{align}
+\dot{x} &amp;= \alpha x - \beta x y,\
+\dot{y} &amp;= -\gamma y + \delta x y.
+\end{align}</p>
+<p>Here the parameters have the following meaning:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> is the per-capita growth rate of prey animals, i.e. how many new prey are born per capita and unit of time,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is the effect of the presence of preditors on prey death rate,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma\)</span> is the per-capita death rate of the preditor population,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta\)</span> is the effect of the presence of prey on the preditor growth rate.</p></li>
+</ul>
+<p>The cell below defines the Lotka-Volterra equations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def lotka_volterra(t, z, alpha, beta, gamma, delta):
+    &quot;&quot;&quot;
+    Defines the Lotka-Volterra system of differential equations.
+
+    Args:
+        t: Time (scalar).
+        z: A list or array containing the state variables [x, y].
+        alpha: Rate of prey reproduction.
+        beta: Rate of prey-predator interaction leading to prey death.
+        gamma: Rate of predator death.
+        delta: Rate of prey-predator interaction leading to predator reproduction.
+
+    Returns:
+        A NumPy array containing the derivatives [dx/dt, dy/dt].
+    &quot;&quot;&quot;
+    x, y = z
+    dxdt = alpha * x - beta * x * y
+    dydt = -gamma * y + delta * x * y
+    return np.array([dxdt, dydt])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use this function to generate mock data. Feel free to play around with the parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>tspan = (0, 50)
+z0 = [10, 5]
+alpha = 1.1
+beta = 0.4
+gamma = 0.2
+delta = 0.1
+t_eval = np.linspace(tspan[0], tspan[1], 500)
+
+sol = solve_ivp(
+    fun=lambda t, z: lotka_volterra(t, z, alpha, beta, gamma, delta),
+    t_span=tspan,
+    y0=z0,
+    t_eval=t_eval
+)
+
+time = sol.t
+data = sol.y.T
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using matplotlib we’ll visualize the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10, 6))
+plt.plot(time, data[:, 0], label=&#39;Prey&#39;)
+plt.plot(time, data[:, 1], label=&#39;Predator&#39;)
+plt.xlabel(&#39;Time&#39;)
+plt.ylabel(&#39;Population&#39;)
+plt.title(&#39;Lotka-Volterra Model Simulation&#39;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-basic-sindy">
+<h3>A basic SINDy<a class="headerlink" href="#a-basic-sindy" title="Link to this heading">#</a></h3>
+<p>Let us implement a basic SINDy ourselves. We will follow the following steps.</p>
+<ol class="arabic simple">
+<li><p>Get data (which we already did by simulating).</p></li>
+<li><p>Compute estimated derivatives using the difference quotient <span class="math notranslate nohighlight">\(\dot{x}(t_i) \approx \frac{x(t_{i+1}) - x(t_i)}{t_{i+1} - t_i}\)</span>. Make sure it has the same dimensions as our data.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>Xdot_sim = ...  # TODO: calculate the difference quotient, account for array size
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Xdot_sim</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:])</span><span class="o">/</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">Xdot_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xdot_sim</span><span class="p">,</span><span class="n">Xdot_sim</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>X, Y = data[:, 0], data[:, 1]
+Theta = np.column_stack([
+      # TODO: calclulate monomes up to second order
+      # constant
+      # x
+      # y
+      # x^2
+      # xy
+      # y^2
+])
+
+feature_names = [&#39;1&#39;, &#39;x&#39;, &#39;y&#39;, &#39;x^2&#39;, &#39;xy&#39;, &#39;y^2&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">X</span><span class="p">),</span>     <span class="c1"># constant</span>
+    <span class="n">X</span><span class="p">,</span>                   <span class="c1"># x</span>
+    <span class="n">Y</span><span class="p">,</span>                   <span class="c1"># y</span>
+    <span class="n">X</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>                <span class="c1"># x^2</span>
+    <span class="n">X</span><span class="o">*</span><span class="n">Y</span><span class="p">,</span>                 <span class="c1"># xy</span>
+    <span class="n">Y</span><span class="o">**</span><span class="mi">2</span>                 <span class="c1"># y^2</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</details><ol class="arabic simple" start="4">
+<li><p>Least squares regression for each variable</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>coefs = []
+for i in range(2):  # prey and predator
+    lr = LinearRegression(fit_intercept=False)
+    lr.fit(
+        # TODO: fit basis to derivative
+    )
+
+coefs = np.array(coefs)
+
+def print_sindy(coefs, name=&quot;model&quot;):
+    print(&quot;-----------------------&quot;)
+    print(name+&quot;:&quot;)
+    for i, var in enumerate([&#39;Prey&#39;, &#39;Predator&#39;]):
+        terms = []
+        for c, name in zip(coefs[i], feature_names):
+            if c != 0:
+                terms.append(f&quot;{c:+.2f}*{name}&quot;)
+        eq = &quot; &quot;.join(terms)
+        print(f&quot;d{var}/dt = {eq}&quot;)
+    print(&quot;-----------------------&quot;)
+
+print_sindy(coefs, &quot;Barebones SINDy without sparsity, aka INDy&quot;)
+
+# 5. Apply thresholding for sparsity
+threshold = ...  # Tune this threshold
+coefs[np.abs(coefs) &lt; threshold] = 0
+
+print_sindy(coefs, &quot;Barebones SINDy&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Theta</span><span class="p">,</span> <span class="n">Xdot_sim</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+    <span class="n">coefs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.09</span>
+</pre></div>
+</div>
+</details><p>To see if this was successful, we will simulate the inferred model and plot this model against the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Define the discovered system as a function
+def discovered_system(t, z, coefs, feature_names):
+    x, y = z
+    # TODO: Recreate the Theta matrix for the current state (x, y)
+
+# Simulate the discovered system
+# Use the same time points and initial conditions as the original simulation
+sol_discovered = solve_ivp(
+    # TODO: integrate discoverd system with the learned coefs
+)
+
+sim_barebones = sol_discovered.y.T
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">discovered_system</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">z</span>
+    <span class="n">Theta_current</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">dxdt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Theta_current</span><span class="p">,</span> <span class="n">coefs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dydt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Theta_current</span><span class="p">,</span> <span class="n">coefs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dxdt</span><span class="p">,</span> <span class="n">dydt</span><span class="p">])</span>
+
+
+<span class="n">sol_discovered</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+    <span class="n">fun</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="n">discovered_system</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">feature_names</span><span class="p">),</span>
+    <span class="n">t_span</span><span class="o">=</span><span class="n">tspan</span><span class="p">,</span>
+    <span class="n">y0</span><span class="o">=</span><span class="n">z0</span><span class="p">,</span>
+    <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10, 6))
+plt.plot(time, data[:, 0], label=&#39;Prey (Original Data)&#39;)
+plt.plot(time, data[:, 1], label=&#39;Predator (Original Data)&#39;)
+plt.plot(time, sim_barebones[:, 0], &quot;c--&quot;, label=&quot;Prey (Barebones SINDy)&quot;, linewidth=3)
+plt.plot(time, sim_barebones[:, 1], &quot;m--&quot;, label=&quot;Predator (Barebones SINDy)&quot;, linewidth=3)
+plt.ylim([0, 14])
+plt.xlabel(&#39;Time&#39;)
+plt.ylabel(&#39;Population&#39;)
+plt.title(&#39;Barebones SINDy Simulation vs. Original Data&#39;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+<section id="pysindy">
+<h4>PySINDy<a class="headerlink" href="#pysindy" title="Link to this heading">#</a></h4>
+<p>We saw that our barebones SINDy implementation did infer a model very similar to the data, but not quite. So now we will try again with <code class="docutils literal notranslate"><span class="pre">PySINDy</span></code>. We will follow the same steps but using more sophisticated tools. <code class="docutils literal notranslate"><span class="pre">PySINDy</span></code> has different implementations of estimating the derivates for our data.
+We will chose <code class="docutils literal notranslate"><span class="pre">FiniteDifference</span></code> but go to the second order this time:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>differentiation_method = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">differentiation_method</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">FiniteDifference</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><p><code class="docutils literal notranslate"><span class="pre">PySINDy</span></code> also comes with predefined feature libraries. Many are possible but here we will stay with <code class="docutils literal notranslate"><span class="pre">PolynomialLibrary</span></code> to order 3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>feature_library = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">feature_library</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">PolynomialLibrary</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><p>These are both higher ordered versions of what we did above. But the real advantage are the different optimizers that are implemented in <code class="docutils literal notranslate"><span class="pre">PySINDy</span></code>. For now we will use the Sequentially thresholded least squares algorithm <code class="docutils literal notranslate"><span class="pre">STLSQ</span></code> with the <code class="docutils literal notranslate"><span class="pre">threshold</span> <span class="pre">=</span> <span class="pre">0.01</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>optimizer = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">STLSQ</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><p>Now, we put everything together into a <code class="docutils literal notranslate"><span class="pre">SINDy</span></code> model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>model = ps.SINDy(
+    # TODO: give the model differentiation method, feature library, and and optimizer
+)
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">SINDy</span><span class="p">(</span>
+    <span class="n">differentiation_method</span><span class="o">=</span><span class="n">differentiation_method</span><span class="p">,</span>
+    <span class="n">feature_library</span><span class="o">=</span><span class="n">feature_library</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</details><p>When fitting the model to data we can also name the variables of our ODE for nicer outputs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>model.fit(
+    # TODO: fit the model to the data and give the variable names
+)
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">time</span><span class="p">,</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</details><p>We can now print the set of equations that <code class="docutils literal notranslate"><span class="pre">PySINDy</span></code> found for us.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>model.print()
+</pre></div>
+</div>
+</div>
+</div>
+<p>This closer to the ground truth than our barebones version. We can visualize by first simulating and then plotting with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>sim = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">z0</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10, 6))
+plt.scatter(time, data[:, 0], label=&#39;Prey&#39;)
+plt.scatter(time, data[:, 1], label=&#39;Predator&#39;)
+plt.plot(time, sim[:, 1], &quot;m--&quot;, label=&quot;SINDy model, preditor&quot;, linewidth=3)
+plt.plot(time, sim[:, 0], &quot;c--&quot;, label=&quot;SINDy model, pray&quot;, linewidth=3)
+plt.xlabel(&quot;x&quot;)
+plt.ylabel(&quot;y&quot;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fitzhughnagumo">
+<h3>FitzHugh–Nagumo<a class="headerlink" href="#fitzhughnagumo" title="Link to this heading">#</a></h3>
+<p>The FitzHugh-Nagumo model describes the prototype of an excitable system e.g. a neuron.</p>
+<p>\begin{align}
+\dot{v} &amp;= v-\frac{v^3}{3}-w+I_\text{ext},\
+\tau \dot{w} &amp;= v + a - bw.
+\end{align}</p>
+<p>Where</p>
+<ul class="simple">
+<li><p><strong>v</strong> is the fast activator variable, e.g. the membrane potential</p></li>
+<li><p><strong>w</strong> is the slow recovery variable, e.g. the sodium channel reactivation</p></li>
+<li><p><strong>a</strong> controlls the excitability threshold</p></li>
+<li><p><strong>b</strong> controlls the coupling of the recovery back onto itself</p></li>
+<li><p><span class="math notranslate nohighlight">\(I_\text{ext}\)</span> is an external stimulus current</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau\)</span> seperates time scales of <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def fitzhugh_nagumo(t, z, a, b, tau, I_ext):
+    &quot;&quot;&quot;
+    Defines the FitzHugh-Nagumo system of differential equations.
+
+    Args:
+        t: Time (scalar).
+        z: A list or array containing the state variables [v, w].
+        a: Parameter &#39;a&#39;.
+        b: Parameter &#39;b&#39;.
+        tau: Parameter &#39;tau&#39;.
+        I_ext: External current term.
+
+    Returns:
+        A NumPy array containing the derivatives [dv/dt, dw/dt].
+    &quot;&quot;&quot;
+    v, w = z
+    dvdt = v - (v**3)/3 - w + I_ext
+    dwdt = (v + a - b*w) / tau
+    return np.array([dvdt, dwdt])
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this set of differential equations we can generate data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Standard parameter values for FitzHugh-Nagumo
+a = 0.7
+b = 0.8
+tau = 12.5
+I_ext = 0.4
+
+# Initial conditions and time span for simulation
+z0_fn = [-1.0, 1.0]
+tspan_fn = (0, 100)
+t_eval_fn = np.linspace(tspan_fn[0], tspan_fn[1], 1000)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Simulate the FitzHugh-Nagumo system
+sol_fn = solve_ivp(
+    # TODO: integrate the FitzHugh-Nagumo model and evaluate at t_eval_fn
+)
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sol_fn</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+    <span class="n">fun</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="n">fitzhugh_nagumo</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">I_ext</span><span class="p">),</span>
+    <span class="n">t_span</span><span class="o">=</span><span class="n">tspan_fn</span><span class="p">,</span>
+    <span class="n">y0</span><span class="o">=</span><span class="n">z0_fn</span><span class="p">,</span>
+    <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval_fn</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+</details><p>Real-world data has noise. So we will add a small amount of  gaussian noise to this data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>
+time_fn = sol_fn.t
+data_fn = ... # TODO: Bring the data in form and add a small amount noise
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_fn</span> <span class="o">=</span> <span class="n">sol_fn</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">sol_fn</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>
+# You can display or plot the data here if you like
+plt.figure(figsize=(10, 6))
+plt.plot(time_fn, data_fn[:, 0], label=&#39;v (Membrane Potential)&#39;)
+plt.plot(time_fn, data_fn[:, 1], label=&#39;w (Recovery Variable)&#39;)
+plt.xlabel(&#39;Time&#39;)
+plt.ylabel(&#39;State Variable&#39;)
+plt.title(&#39;FitzHugh-Nagumo Model Simulation&#39;)
+plt.legend()
+plt.grid(True)
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+<section id="sindy">
+<h4>SINDy<a class="headerlink" href="#sindy" title="Link to this heading">#</a></h4>
+<p>We will set up <code class="docutils literal notranslate"><span class="pre">PySINDy</span></code> the same as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>feature_library_fn = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">feature_library_fn</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">PolynomialLibrary</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>optimizer_fn = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer_fn</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">STLSQ</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>model_fn = ... # TODO: set up the model. We will reuse differentiation_method from before
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model_fn</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">SINDy</span><span class="p">(</span>
+    <span class="n">differentiation_method</span><span class="o">=</span><span class="n">differentiation_method</span><span class="p">,</span>
+    <span class="n">feature_library</span><span class="o">=</span><span class="n">feature_library_fn</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer_fn</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>model_fn.fit(
+    # TODO: fit the model
+)
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model_fn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_fn</span><span class="p">,</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">time_fn</span><span class="p">,</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>model_fn.print()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>sim_fn = model_fn.simulate(z0_fn,t=time_fn)
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Xdot_sim</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:])</span><span class="o">/</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">Xdot_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xdot_sim</span><span class="p">,</span><span class="n">Xdot_sim</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10, 6))
+plt.plot(time_fn, data_fn[:, 0], label=&#39;v (Membrane Potential)&#39;)
+plt.plot(time_fn, data_fn[:, 1], label=&#39;w (Recovery Variable)&#39;)
+plt.plot(time_fn, sim_fn[:, 1], &quot;m--&quot;, label=&quot;SINDy model, v&quot;, linewidth=3)
+plt.plot(time_fn, sim_fn[:, 0], &quot;c--&quot;, label=&quot;SINDy model, w&quot;, linewidth=3)
+plt.xlabel(&#39;Time&#39;)
+plt.ylabel(&#39;State Variable&#39;)
+plt.title(&#39;FitzHugh-Nagumo Model Simulation&#39;)
+plt.legend()
+plt.grid(True)
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analyzing-the-results">
+<h4>Analyzing the results<a class="headerlink" href="#analyzing-the-results" title="Link to this heading">#</a></h4>
+<p>We will compare the derivatives, that we estimated from the data, with the ones SINDy found. We can save the estimated derivates by calling our <code class="docutils literal notranslate"><span class="pre">differentiation_method</span></code> on the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>X_dot_computed = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_dot_computed</span> <span class="o">=</span> <span class="n">differentiation_method</span><span class="p">(</span><span class="n">data_fn</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">time_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><p>Calling the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method of our fitted model returns the right-hand side of the learned model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>X_dot_predicted = ...
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_dot_predicted</span> <span class="o">=</span> <span class="n">model_fn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>fig, axs = plt.subplots(data_fn.shape[1], 1, sharex=True, figsize=(7, 9))
+for i in range(data_fn.shape[1]):
+    axs[i].plot(time_fn, X_dot_computed[:, i], &quot;k&quot;, label=&quot;numerical derivative&quot;)
+    axs[i].plot(time_fn, X_dot_predicted[:, i], &quot;r--&quot;, label=&quot;model prediction&quot;)
+    axs[i].legend()
+axs[0].set(xlabel=&quot;t&quot;, ylabel=r&quot;$\dot v$&quot;)
+axs[1].set(xlabel=&quot;t&quot;, ylabel=r&quot;$\dot w$&quot;)
+fig.show()
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="predictions">
+<h4>Predictions<a class="headerlink" href="#predictions" title="Link to this heading">#</a></h4>
+<p>We would also like the model to generalize to a different set of initial conditions. Let’s start some place different and simulate both the ground truth and the learned model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>z0_pred = ...
+sol_pred = solve_ivp(
+    # TODO: integrate the FitzHugh-Nagamu model with new initial conditions
+    )
+pred_fn = ... # TODO: simulate the identified system
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Reveal</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z0_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sol_pred</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
+    <span class="n">fun</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="n">fitzhugh_nagumo</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">I_ext</span><span class="p">),</span>
+    <span class="n">t_span</span><span class="o">=</span><span class="n">tspan_fn</span><span class="p">,</span>
+    <span class="n">y0</span><span class="o">=</span><span class="n">z0_pred</span><span class="p">,</span>
+    <span class="n">t_eval</span><span class="o">=</span><span class="n">time_fn</span><span class="p">)</span>
+<span class="n">pred_fn</span> <span class="o">=</span> <span class="n">model_fn</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">z0_pred</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="n">time_fn</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10, 6))
+plt.plot(time_fn, sol_pred.y[0,:], label=&#39;v (Membrane Potential)&#39;)
+plt.plot(time_fn, sol_pred.y[1,:], label=&#39;w (Recovery Variable)&#39;)
+plt.plot(time_fn, pred_fn[:, 1], &quot;m--&quot;, label=&quot;SINDy model, v&quot;, linewidth=3)
+plt.plot(time_fn, pred_fn[:, 0], &quot;c--&quot;, label=&quot;SINDy model, w&quot;, linewidth=3)
+plt.xlabel(&#39;Time&#39;)
+plt.ylabel(&#39;State Variable&#39;)
+plt.title(&#39;FitzHugh-Nagumo Model Simulation&#39;)
+plt.legend()
+plt.grid(True)
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/practical-sessions/sindy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright © 2025.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

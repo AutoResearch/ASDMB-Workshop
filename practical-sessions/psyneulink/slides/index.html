@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>PsyNeuLink Visual Builder — Per-Connection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    :root {
+      --port: 16px;
+      --gain: #1e74ff;
+      --slope: #1e74ff;
+      --bias: #f39c12;
+      --offset: #16a085;
+      --proj: #7a2cff;
+      --ctrl: #7a2cff;
+      --learn: #7a2cff;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif
+    }
+
+    #workspace {
+      position: relative;
+      height: 100vh;
+      background: #f6f7fb;
+      overflow: hidden;
+      border-top: 3px solid #e9eaf0
+    }
+
+    #wires {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0
+    }
+
+    .mechanism {
+      position: absolute;
+      z-index: 2;
+      user-select: none;
+      width: 240px;
+      min-height: 124px;
+      background: #fff;
+      border: 2px solid #111;
+      border-radius: 28px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .06);
+      padding: 10px 14px 18px;
+      cursor: grab
+    }
+
+    .mechanism.dragging { opacity: .9; cursor: grabbing }
+
+    .title { font-weight: 700; text-align: center }
+    .subtitle { font-size: 12px; color: #666; text-align: center; margin-top: 2px }
+
+    .func {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 6px;
+      padding: 0 6px;
+      word-break: break-word;
+    }
+    .func .gain   { color: var(--gain);   font-weight: 600 }
+    .func .slope  { color: var(--slope);  font-weight: 600 }
+    .func .bias   { color: var(--bias);   font-weight: 600 }
+    .func .w      { color: var(--proj);   font-weight: 600 }
+    .func .offset { color: var(--offset); font-weight: 600 }
+
+    .ports { position: absolute; top: 0; bottom: 0; width: 0 }
+    .ports.in { left: 0 }
+    .ports.out { right: 0 }
+
+    .port {
+      position: absolute;
+      width: var(--port);
+      height: var(--port);
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #111;
+      transform: translate(-50%, -50%)
+    }
+    .ports.in .port  { left: 0; transform: translate(-50%, -50%) }
+    .ports.out .port { left: calc(100%) }
+
+    .p-ports {
+      position: absolute;
+      left: 0; right: 0; top: -6px; height: 0;
+      pointer-events: none
+    }
+    .p-port {
+      position: absolute;
+      width: var(--port);
+      height: var(--port);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: auto;
+      background: #fff;
+      border: 2px solid currentColor
+    }
+    .p-port.slope  { left: 22%; color: var(--slope) }
+    .p-port.bias   { left: 50%; color: var(--bias) }
+    .p-port.offset { left: 78%; color: var(--offset) }
+
+    .menu {
+      position: absolute;
+      z-index: 10;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.12)
+    }
+    .menu h4 { margin: .2rem 0 .5rem; font-size: 13px }
+    .menu label { display: block; font-size: 12px; margin: 6px 0 }
+    .menu .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap }
+    .menu input[type="number"], .menu input[type="text"] { width: 180px }
+
+    .hidden { display: none }
+
+    line.proj  { stroke: var(--proj);  stroke-width: 3 }
+    line.ctrl  { stroke: var(--ctrl);  stroke-width: 3 }
+    line.learn { stroke: var(--learn); stroke-dasharray: 6 6; stroke-width: 2.5 }
+
+    .weight-label {
+      position: absolute;
+      z-index: 5;
+      font-size: 12px;
+      line-height: 1;
+      padding: 2px 6px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      transform: translate(-50%, -50%);
+      pointer-events: none; /* clicks go to the line */
+    }
+  </style>
+</head>
+<body>
+<div id="workspace">
+  <svg id="wires"></svg>
+
+  <!-- add menu -->
+  <div id="add-menu" class="menu hidden">
+    <div class="row">
+      <button id="add-mech">+ Mechanism</button>
+    </div>
+  </div>
+
+  <!-- mechanism menu -->
+  <div id="mech-menu" class="menu hidden">
+    <h4>Edit Mechanism</h4>
+    <label>Name:
+      <input id="name-input" type="text" placeholder="optional label (e.g., 'Stimulus')"/>
+    </label>
+    <label>Type:
+      <select id="type-select">
+        <option value="ProcessingMechanism">ProcessingMechanism</option>
+        <option value="ControlMechanism">ControlMechanism</option>
+        <option value="LearningMechanism">LearningMechanism</option>
+      </select>
+    </label>
+    <label>Function:
+      <select id="fn-select">
+        <option value="linear">Linear</option>
+        <option value="logistic">Logistic</option>
+        <option value="custom">Custom…</option>
+      </select>
+    </label>
+    <label id="expr-row" class="row hidden">Custom expression:
+      <input id="expr-input" type="text" placeholder="e.g., y = Energy(x)">
+    </label>
+    <div class="row">
+      <label>#In <input id="in-count" type="number" min="1" max="6" value="1"></label>
+      <label>#Out <input id="out-count" type="number" min="1" max="6" value="1"></label>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-top:6px;">
+      <button id="apply-mech">Apply</button>
+      <button id="delete-mech" style="color:#b00020">Delete</button>
+    </div>
+  </div>
+
+  <!-- weight menu -->
+  <div id="weight-menu" class="menu hidden">
+    <h4>Edit Projection Weight</h4>
+    <label>Weight:
+      <input id="weight-input" type="number" step="0.1" value="1">
+    </label>
+    <div class="row" style="justify-content:space-between;margin-top:6px;">
+      <button id="apply-weight">Apply</button>
+      <button id="cancel-weight">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const ws = document.getElementById('workspace');
+  const svg = document.getElementById('wires');
+
+  const addMenu = document.getElementById('add-menu');
+  const addBtn  = document.getElementById('add-mech');
+
+  const mechMenu = document.getElementById('mech-menu');
+  const nameInp  = document.getElementById('name-input');
+  const typeSel  = document.getElementById('type-select');
+  const fnSelect = document.getElementById('fn-select');
+  const exprRow  = document.getElementById('expr-row');
+  const exprInp  = document.getElementById('expr-input');
+  const inCount  = document.getElementById('in-count');
+  const outCount = document.getElementById('out-count');
+  const applyBtn = document.getElementById('apply-mech');
+  const deleteBtn= document.getElementById('delete-mech');
+
+  const weightMenu = document.getElementById('weight-menu');
+  const weightInp  = document.getElementById('weight-input');
+  const applyWeightBtn = document.getElementById('apply-weight');
+  const cancelWeightBtn = document.getElementById('cancel-weight');
+
+  let addAt = {x: 0, y: 0};
+  let currentMech = null;
+  let isDraggingOrConnecting = false;
+
+  // Click suppression after gestures (drag or wiring)
+  let suppressClicksUntil = 0;
+  const now = () => performance.now();
+  const clicksSuppressed = () => now() < suppressClicksUntil;
+  const suppressClicks = (ms = 200) => { suppressClicksUntil = now() + ms; };
+
+  // temp gesture
+  let tempLine = null;
+  let tempFromEl = null;   // source port / param port
+  let tempMode = null;     // 'proj' | 'ctrl' | 'learn'
+  let tempProjLine = null; // projection line for learn
+
+  // connections
+  // For proj connections: {type:'proj', line, fromEl, toEl, weight, weightEl}
+  // For ctrl: {type:'ctrl', line, fromEl, toEl}
+  // For learn: {type:'learn', line, fromEl, projLine}
+  const connections = [];
+
+  // line click/drag discriminator for projections
+  let lineGesture = null; // {line, startX, startY, moved}
+
+  /* ---------- utilities ---------- */
+  const wsRect = () => ws.getBoundingClientRect();
+  const isInDOM = (el) => el && document.contains(el);
+  const centerOf = (el) => {
+    const r = el.getBoundingClientRect(), p = wsRect();
+    return {x: r.left + r.width / 2 - p.left, y: r.top + r.height / 2 - p.top};
+  };
+  const midpointOf = (line) => {
+    const x1 = +line.getAttribute('x1'), y1 = +line.getAttribute('y1');
+    const x2 = +line.getAttribute('x2'), y2 = +line.getAttribute('y2');
+    return {x: (x1 + x2) / 2, y: (y1 + y2) / 2};
+  };
+  const setLine = (ln, a, b) => {
+    ln.setAttribute('x1', a.x); ln.setAttribute('y1', a.y - 3);
+    ln.setAttribute('x2', b.x); ln.setAttribute('y2', b.y - 3);
+  };
+  const makeLine = (cls) => {
+    const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    l.setAttribute('class', cls);
+    l.style.pointerEvents = 'stroke';
+    svg.appendChild(l);
+    return l;
+  };
+  const clampInt = (v, min, max) => Math.max(min, Math.min(max, parseInt(v || min, 10)));
+  const getPorts = (mech, side) => Array.from(mech.querySelectorAll(`.ports.${side} .port`));
+  const getParamPorts = (mech) => Array.from(mech.querySelectorAll('.p-port'));
+  const showMenu = (menu, x, y) => { menu.style.left = x+'px'; menu.style.top = y+'px'; menu.classList.remove('hidden'); };
+  const hideMenus = () => { addMenu.classList.add('hidden'); mechMenu.classList.add('hidden'); weightMenu.classList.add('hidden'); };
+  const dist2 = (ax, ay, bx, by) => { const dx = ax-bx, dy = ay-by; return dx*dx + dy*dy; };
+  const THRESH2 = 25; // 5px squared
+
+  const projOfLine = (line) => connections.find(c => c.type==='proj' && c.line===line);
+
+  function createWeightLabel() {
+    const el = document.createElement('div');
+    el.className = 'weight-label';
+    el.textContent = '1';
+    ws.appendChild(el);
+    return el;
+  }
+
+  function positionWeightLabel(conn) {
+    if (!conn.weightEl || !isInDOM(conn.line)) return;
+    const mid = midpointOf(conn.line);
+    conn.weightEl.style.left = mid.x + 'px';
+    conn.weightEl.style.top  = mid.y + 'px';
+  }
+
+  /* ---------- workspace click ---------- */
+  ws.addEventListener('click', (e) => {
+    if (isDraggingOrConnecting || clicksSuppressed()) return;
+    if (e.target === ws || e.target === svg) {
+      hideMenus();
+      addAt = {x: e.clientX - wsRect().left, y: e.clientY - wsRect().top};
+      showMenu(addMenu, addAt.x, addAt.y);
+    }
+  });
+  addBtn.addEventListener('click', () => {
+    hideMenus();
+    createMechanism(addAt.x, addAt.y, {type: 'ProcessingMechanism'});
+  });
+
+  /* ---------- create & layout mechanisms ---------- */
+  let mechSeq = 1;
+
+  function renderTitle(el) {
+    const name = el.dataset.name || '';
+    const type = el.dataset.type || '';
+    el.querySelector('.title').textContent = name ? name : type;
+    el.querySelector('.subtitle').textContent = name ? `${el.dataset.id} · ${type}` : el.dataset.id;
+  }
+
+  function createMechanism(x, y, {type='ProcessingMechanism', fn='linear', ins=1, outs=1, name='', expr=''} = {}) {
+    const el = document.createElement('div');
+    el.className = 'mechanism';
+    el.dataset.id   = `M${mechSeq++}`;
+    el.dataset.type = type;
+    el.dataset.fn   = fn;
+    el.dataset.expr = expr;
+    el.dataset.ins  = ins;
+    el.dataset.outs = outs;
+    el.dataset.name = name;
+    el.style.left = (x - 120) + 'px';
+    el.style.top  = (y - 65)  + 'px';
+
+    el.innerHTML = `
+      <div class="title"></div>
+      <div class="subtitle"></div>
+      <div class="func"></div>
+      <div class="p-ports">
+        <div class="p-port slope"  title="slope (param)"></div>
+        <div class="p-port bias"   title="bias (param)"></div>
+        <div class="p-port offset" title="offset (param)"></div>
+      </div>
+      <div class="ports in"></div>
+      <div class="ports out"></div>
+    `;
+    ws.appendChild(el);
+    renderTitle(el);
+    layoutMechanism(el);
+    makeDraggable(el);
+
+    // open edit menu on explicit clicks
+    el.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      if (isDraggingOrConnecting || clicksSuppressed()) return;
+      currentMech = el;
+      nameInp.value  = el.dataset.name || '';
+      typeSel.value  = el.dataset.type;
+      fnSelect.value = el.dataset.fn;
+      exprInp.value  = el.dataset.expr || '';
+      toggleExprRow();
+      inCount.value  = el.dataset.ins;
+      outCount.value = el.dataset.outs;
+      hideMenus();
+      showMenu(mechMenu, ev.clientX - wsRect().left, ev.clientY - wsRect().top);
+    });
+
+    wireMechanism(el);
+    return el;
+  }
+
+  function layoutMechanism(el) {
+    const type = el.dataset.type;
+    const fn   = el.dataset.fn;
+    const expr = (el.dataset.expr || '').trim();
+    const func = el.querySelector('.func');
+
+    if (fn === 'custom' && expr) {
+      func.textContent = expr; // display only; not executed
+    } else if (type === 'ProcessingMechanism') {
+      func.innerHTML = fn === 'linear'
+        ? `y = <span class="slope">slope</span>·(x + <span class="bias">bias</span>) + <span class="offset">offset</span>`
+        : `y = σ(<span class="gain">gain</span>·(x + <span class="bias">bias</span>)) + <span class="offset">offset</span>`;
+    } else if (type === 'ControlMechanism') {
+      func.innerHTML = `y = <span class="slope">slope</span>·(x + <span class="bias">bias</span>) + <span class="offset">offset</span>`;
+    } else { // LearningMechanism
+      func.innerHTML = `Δ<span class="w">w</span> = η·δ·x`;
+    }
+
+    const ins  = clampInt(el.dataset.ins,  1, 6);
+    const outs = clampInt(el.dataset.outs, 1, 6);
+    el.dataset.ins  = ins;
+    el.dataset.outs = outs;
+
+    const inBox  = el.querySelector('.ports.in');
+    const outBox = el.querySelector('.ports.out');
+    inBox.innerHTML = ''; outBox.innerHTML = '';
+
+    for (let i = 0; i < ins; i++) { inBox.appendChild(Object.assign(document.createElement('div'), {className:'port in'})); }
+    for (let i = 0; i < outs; i++) { outBox.appendChild(Object.assign(document.createElement('div'), {className:'port out'})); }
+
+    const H = el.getBoundingClientRect().height;
+    const posY = (i, n) => ((i + 1) / (n + 1)) * H;
+    getPorts(el, 'in').forEach((p, i) => { p.style.top = posY(i, ins) + 'px'; });
+    getPorts(el, 'out').forEach((p, i) => { p.style.top = posY(i, outs) + 'px'; });
+
+    wireMechanism(el);
+    pruneDanglingConnections();
+    redrawAll();
+    renderTitle(el);
+  }
+
+  /* ---------- wiring: per-connection behavior ---------- */
+  function wireMechanism(el) {
+    // outputs: start projection drag
+    getPorts(el, 'out').forEach(p => {
+      p.onmousedown = (ev) => {
+        ev.stopPropagation();
+        isDraggingOrConnecting = true;
+        tempMode  = 'proj';
+        tempFromEl= p;
+        tempLine  = makeLine('proj');
+        const a = centerOf(p);
+        setLine(tempLine, a, a);
+      };
+    });
+
+    // inputs: end projection (out → in)
+    getPorts(el, 'in').forEach(p => {
+      p.onmouseup = (ev) => {
+        if (tempMode !== 'proj' || !tempFromEl || !tempLine) return;
+        const srcMech = tempFromEl.closest('.mechanism');
+        const dstMech = p.closest('.mechanism');
+        if (srcMech === dstMech) {
+          cancelTemp();
+          isDraggingOrConnecting = false;
+          suppressClicks();
+          return;
+        }
+        connectPorts(tempFromEl, p);
+        cancelTemp();
+        isDraggingOrConnecting = false;
+        suppressClicks();
+      };
+    });
+
+    // parameter ports: end projection (out → param)
+    getParamPorts(el).forEach(pp => {
+      pp.onmouseup = (ev) => {
+        if (tempMode !== 'proj' || !tempFromEl || !tempLine) return;
+        const srcMech = tempFromEl.closest('.mechanism');
+        const dstMech = pp.closest('.mechanism');
+        if (srcMech === dstMech) {
+          cancelTemp();
+          isDraggingOrConnecting = false;
+          suppressClicks();
+          return;
+        }
+        connectPorts(tempFromEl, pp);
+        cancelTemp();
+        isDraggingOrConnecting = false;
+        suppressClicks();
+      };
+    });
+
+    // parameter ports: start control drag to spawn control mech
+    getParamPorts(el).forEach(pp => {
+      pp.onmousedown = (ev) => {
+        ev.stopPropagation();
+        isDraggingOrConnecting = true;
+        tempMode  = 'ctrl';
+        tempFromEl= pp;
+        tempLine  = makeLine('ctrl');
+        const a = centerOf(pp);
+        setLine(tempLine, a, a);
+      };
+    });
+  }
+
+  // Add interactions to projection line: click = edit weight, drag = spawn learning
+  function enableLineInteractions(lineEl) {
+    lineEl.addEventListener('mousedown', (ev) => {
+      ev.stopPropagation();
+      // Start a gesture; don't create learn tempLine yet (we'll do it if movement passes threshold)
+      lineGesture = { line: lineEl, startX: ev.clientX, startY: ev.clientY, moved: false };
+      isDraggingOrConnecting = true;
+    });
+
+    // We listen on document for move/up to decide
+    document.addEventListener('mousemove', onLineMouseMove);
+    document.addEventListener('mouseup', onLineMouseUp);
+  }
+
+  function onLineMouseMove(ev) {
+    if (!lineGesture || lineGesture.moved) return;
+    if (dist2(ev.clientX, ev.clientY, lineGesture.startX, lineGesture.startY) >= THRESH2) {
+      // switch to "learn drag"
+      lineGesture.moved = true;
+      tempMode = 'learn';
+      tempProjLine = lineGesture.line;
+      tempLine = makeLine('learn');
+      const mid = midpointOf(tempProjLine);
+      setLine(tempLine, mid, mid);
+    }
+  }
+
+  function onLineMouseUp(ev) {
+    if (!lineGesture) return;
+    const lg = lineGesture;
+    lineGesture = null;
+
+    if (!lg.moved) {
+      // Treat as CLICK: open weight menu for this projection
+      const conn = projOfLine(lg.line);
+      if (conn) {
+        const mid = midpointOf(conn.line);
+        weightInp.value = conn.weight.toString();
+        hideMenus();
+        showMenu(weightMenu, mid.x, mid.y - 28);
+        currentWeightConn = conn;
+      }
+      isDraggingOrConnecting = false;
+      return;
+    }
+
+    // If moved: we are already in 'learn' mode; handle mouseup path for learn below
+  }
+
+  // helper: create a single projection connection
+  function connectPorts(outPort, targetEl) {
+    tempLine.remove(); // discard freehand
+    const l = makeLine('proj');
+    const a = centerOf(outPort);
+    const b = centerOf(targetEl);
+    setLine(l, a, b);
+    const weightEl = createWeightLabel();
+    const conn = {type: 'proj', line: l, fromEl: outPort, toEl: targetEl, weight: 1, weightEl};
+    connections.push(conn);
+    conn.weightEl.textContent = String(conn.weight);
+    positionWeightLabel(conn);
+    enableLineInteractions(l);
+  }
+
+  /* ---------- global mousemove/up for temp gestures (proj/ctrl/learn) ---------- */
+  document.addEventListener('mousemove', (ev) => {
+    if (!tempLine) return;
+    const b = {x: ev.clientX - wsRect().left, y: ev.clientY - wsRect().top};
+    if (tempMode === 'proj') {
+      const a = centerOf(tempFromEl);
+      setLine(tempLine, a, b);
+    } else if (tempMode === 'ctrl') {
+      const a = centerOf(tempFromEl);
+      setLine(tempLine, b, a); // control → parameter
+    } else if (tempMode === 'learn') {
+      const a = midpointOf(tempProjLine);
+      setLine(tempLine, b, a); // learning → projection
+    }
+  });
+
+  document.addEventListener('mouseup', (ev) => {
+    if (!tempLine) {
+      // No active temp line: may be from line click (handled in onLineMouseUp) or canceled drag
+      return;
+    }
+
+    if (tempMode === 'proj') {
+      cancelTemp();
+      isDraggingOrConnecting = false;
+      suppressClicks();
+      return;
+    }
+
+    const drop = {x: ev.clientX - wsRect().left, y: ev.clientY - wsRect().top};
+
+    if (tempMode === 'ctrl') {
+      const badge = createMechanism(drop.x, drop.y, {
+        type: 'ControlMechanism', fn: 'linear', ins: 1, outs: 1
+      });
+      const out0 = getPorts(badge, 'out')[0] || badge;
+      setLine(tempLine, centerOf(out0), centerOf(tempFromEl));
+      connections.push({type: 'ctrl', line: tempLine, fromEl: out0, toEl: tempFromEl});
+      tempLine = null; tempFromEl = null; tempMode = null; isDraggingOrConnecting = false;
+      suppressClicks();
+    } else if (tempMode === 'learn') {
+      const badge = createMechanism(drop.x, drop.y, {
+        type: 'LearningMechanism', fn: 'linear', ins: 1, outs: 1
+      });
+      const out0 = getPorts(badge, 'out')[0] || badge;
+      const mid  = midpointOf(tempProjLine);
+      setLine(tempLine, centerOf(out0), mid);
+      connections.push({type: 'learn', line: tempLine, fromEl: out0, projLine: tempProjLine});
+      tempLine = null; tempProjLine = null; tempMode = null; isDraggingOrConnecting = false;
+      suppressClicks();
+    }
+  });
+
+  function cancelTemp() {
+    if (tempLine) tempLine.remove();
+    tempLine = null;
+    tempFromEl = null;
+    tempMode = null;
+    tempProjLine = null;
+  }
+
+  /* ---------- dragging elements with movement threshold ---------- */
+  function makeDraggable(el) {
+    let dragging = false, maybeDrag = false;
+    let startX = 0, startY = 0, offX = 0, offY = 0;
+
+    el.addEventListener('mousedown', (ev) => {
+      if (ev.button !== 0) return;
+      const r = el.getBoundingClientRect();
+      offX = ev.clientX - r.left;
+      offY = ev.clientY - r.top;
+      startX = ev.clientX;
+      startY = ev.clientY;
+      maybeDrag = true;
+      dragging = false;
+      ev.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (ev) => {
+      if (!maybeDrag) return;
+      if (!dragging) {
+        if (dist2(ev.clientX, ev.clientY, startX, startY) >= THRESH2) {
+          dragging = true;
+          isDraggingOrConnecting = true;
+          el.classList.add('dragging');
+          hideMenus();
+        } else {
+          return;
+        }
+      }
+      const x = ev.clientX - wsRect().left - offX;
+      const y = ev.clientY - wsRect().top  - offY;
+      el.style.left = x + 'px';
+      el.style.top  = y + 'px';
+      redrawAll();
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (maybeDrag) {
+        if (dragging) {
+          el.classList.remove('dragging');
+          isDraggingOrConnecting = false;
+          suppressClicks();
+        }
+        maybeDrag = false;
+        dragging = false;
+      }
+    });
+  }
+
+  function redrawAll() {
+    for (let i = connections.length - 1; i >= 0; i--) {
+      const c = connections[i];
+      if (c.type === 'proj' || c.type === 'ctrl') {
+        if (!isInDOM(c.fromEl) || (c.toEl && !isInDOM(c.toEl))) {
+          if (c.line) c.line.remove();
+          if (c.weightEl) c.weightEl.remove();
+          connections.splice(i, 1);
+          continue;
+        }
+        const a = centerOf(c.fromEl);
+        const b = centerOf(c.toEl);
+        setLine(c.line, a, b);
+        if (c.type === 'proj') positionWeightLabel(c);
+      } else if (c.type === 'learn') {
+        if (!isInDOM(c.fromEl) || !isInDOM(c.projLine)) {
+          if (c.line) c.line.remove();
+          connections.splice(i, 1);
+          continue;
+        }
+        const a = centerOf(c.fromEl);
+        const b = midpointOf(c.projLine);
+        setLine(c.line, a, b);
+      }
+    }
+  }
+
+  function pruneDanglingConnections() {
+    for (let i = connections.length - 1; i >= 0; i--) {
+      const c = connections[i];
+      if (c.type === 'proj' || c.type === 'ctrl') {
+        if (!isInDOM(c.fromEl) || (c.toEl && !isInDOM(c.toEl))) {
+          if (c.line) c.line.remove();
+          if (c.weightEl) c.weightEl.remove();
+          connections.splice(i, 1);
+        }
+      } else if (c.type === 'learn') {
+        if (!isInDOM(c.fromEl) || !isInDOM(c.projLine)) {
+          if (c.line) c.line.remove();
+          connections.splice(i, 1);
+        }
+      }
+    }
+  }
+
+  /* ---------- edit menu (mechanism) ---------- */
+
+  function toggleExprRow() {
+    if (fnSelect.value === 'custom') exprRow.classList.remove('hidden');
+    else exprRow.classList.add('hidden');
+  }
+  fnSelect.addEventListener('change', toggleExprRow);
+
+  applyBtn.addEventListener('click', () => {
+    if (!currentMech) return;
+    currentMech.dataset.name = (nameInp.value || '').trim();
+    currentMech.dataset.type = typeSel.value;
+    currentMech.dataset.fn   = fnSelect.value;
+    currentMech.dataset.expr = (exprInp.value || '').trim();
+    currentMech.dataset.ins  = clampInt(inCount.value, 1, 6);
+    currentMech.dataset.outs = clampInt(outCount.value, 1, 6);
+    renderTitle(currentMech);
+    layoutMechanism(currentMech);
+    hideMenus();
+  });
+
+  deleteBtn.addEventListener('click', () => {
+    if (!currentMech) return;
+
+    // Any connection touching this mechanism must be removed.
+    const elems = new Set(currentMech.querySelectorAll('.port, .p-port'));
+    const hits = (el) => el && (elems.has(el) || currentMech.contains(el));
+
+    for (let i = connections.length - 1; i >= 0; i--) {
+      const c = connections[i];
+
+      if (c.type === 'proj' || c.type === 'ctrl') {
+        if (hits(c.fromEl) || hits(c.toEl)) {
+          if (c.line) c.line.remove();
+          if (c.weightEl) c.weightEl.remove();
+          connections.splice(i, 1);
+        }
+      } else if (c.type === 'learn') {
+        // remove learning wire if its fromEl is in this mech OR the proj line touches this mech OR proj line gone
+        let remove = false;
+        if (hits(c.fromEl) || !isInDOM(c.projLine)) {
+          remove = true;
+        } else {
+          const x1 = +c.projLine.getAttribute('x1'), y1 = +c.projLine.getAttribute('y1');
+          const x2 = +c.projLine.getAttribute('x2'), y2 = +c.projLine.getAttribute('y2');
+          const aEl = document.elementFromPoint(x1 + wsRect().left, y1 + wsRect().top);
+          const bEl = document.elementFromPoint(x2 + wsRect().left, y2 + wsRect().top);
+          if ((aEl && currentMech.contains(aEl)) || (bEl && currentMech.contains(bEl))) {
+            remove = true;
+          }
+        }
+        if (remove) {
+          if (c.line) c.line.remove();
+          connections.splice(i, 1);
+        }
+      }
+    }
+
+    currentMech.remove();
+    currentMech = null;
+    hideMenus();
+    redrawAll();
+  });
+
+  /* ---------- weight menu ---------- */
+  let currentWeightConn = null;
+
+  applyWeightBtn.addEventListener('click', () => {
+    if (!currentWeightConn) return;
+    const val = Number(weightInp.value);
+    currentWeightConn.weight = (isFinite(val) ? val : 1);
+    currentWeightConn.weightEl.textContent = String(currentWeightConn.weight);
+    positionWeightLabel(currentWeightConn);
+    currentWeightConn = null;
+    hideMenus();
+  });
+
+  cancelWeightBtn.addEventListener('click', () => {
+    currentWeightConn = null;
+    hideMenus();
+  });
+
+  /* ---------- init demo ---------- */
+  const m1 = createMechanism(260, 260, {type: 'ProcessingMechanism', fn: 'linear',   ins: 2, outs: 2, name: 'Input'});
+  const m2 = createMechanism(660, 280, {type: 'ProcessingMechanism', fn: 'custom',   ins: 2, outs: 2, name: 'Hidden', expr: 'y = Energy(x)'}); // demo custom
+
+})();
+</script>
+</body>
+</html>

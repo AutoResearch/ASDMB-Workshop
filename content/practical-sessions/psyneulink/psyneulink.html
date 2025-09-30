@@ -1,0 +1,1671 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PsyNeuLink: Stroop Model &#8212; Automated Scientific Discovery of Mind and Brain (ASDMB)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/schedule.css?v=e580d19a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/practical-sessions/psyneulink/psyneulink';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Experimental Design" href="../experimental-design/index.html" />
+    <link rel="prev" title="Introduction to Autora" href="../introduction-to-autora/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/logo.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">ASDMB</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../schedule.html">
+    Schedule
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Practical Sessions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../speakers.html">
+    Speakers
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/younesStrittmatter/princeton-ASDMB" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../schedule.html">
+    Schedule
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Practical Sessions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../speakers.html">
+    Speakers
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/younesStrittmatter/princeton-ASDMB" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction-to-autora/index.html">Introduction to Autora</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PsyNeuLink: Stroop Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental-design/index.html">Experimental Design</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sindy/index.html">Sindy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction-to-autora/index.html">Introduction to Autora</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">PsyNeuLink</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experimental-design/index.html">Experimental Design</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Practical Sessions</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">PsyNeuLink:...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="psyneulink-stroop-model">
+<h1>PsyNeuLink: Stroop Model<a class="headerlink" href="#psyneulink-stroop-model" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Colab tip: Open the left sidebar (☰)  -&gt; <strong>Table of Contents</strong> to navigate this notebook.
+<a class="reference external" href="https://colab.research.google.com/github/AutoResearch/ASDMB-Workshop/blob/main/ASDMB-book/content/practical-sessions/psyneulink/psyneulink.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+</div></blockquote>
+<section id="content">
+<h2>Content<a class="headerlink" href="#content" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#setup-and-installation"><span class="xref myst">0. Setup and Installation</span></a></p></li>
+<li><p><a class="reference internal" href="#basics"><span class="xref myst">1. Basics</span></a></p></li>
+<li><p><a class="reference internal" href="#linear-stroop"><span class="xref myst">2. Linear Stroop</span></a></p></li>
+<li><p><a class="reference internal" href="#stroop-with-task-demand"><span class="xref myst">3. Stroop with Task Demand</span></a></p></li>
+<li><p><a class="reference internal" href="#stroop-with-conflict-monitoring"><span class="xref myst">4. Stroop With Conflict Monitoring</span></a></p></li>
+</ul>
+</section>
+<section id="setup-and-installation">
+<h2>0. Setup and Installation<a class="headerlink" href="#setup-and-installation" title="Link to this heading">#</a></h2>
+<p>Run this once (or whenever you restart the runtime). This will install PsyNeuLink and import it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>%%capture
+try:
+    import psyneulink as pnl
+    import numpy as np
+    import matplotlib.pyplot as plt
+    print(&quot;psyneulink already installed&quot;)
+except ImportError:
+    %pip install psyneulink
+    import psyneulink as pnl
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>psyneulink already installed
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="basics">
+<h2>1. Basics<a class="headerlink" href="#basics" title="Link to this heading">#</a></h2>
+<p><strong>Content</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mechanisms"><span class="xref myst">Mechanisms</span></a></p></li>
+<li><p><a class="reference internal" href="#Compositions"><span class="xref myst">Compositions</span></a></p></li>
+<li><p><a class="reference internal" href="#Show-Graph"><span class="xref myst">Show Graph</span></a></p></li>
+</ul>
+<section id="mechanisms">
+<h3>Mechanisms<a class="headerlink" href="#mechanisms" title="Link to this heading">#</a></h3>
+<p>Let’s create our first composition in PsyNeuLink that consists of only two mechanisms: <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">Output</span></code>. We will give both of them <code class="docutils literal notranslate"><span class="pre">2</span></code> input- and output-ports. For the <code class="docutils literal notranslate"><span class="pre">Input</span></code> we leave <code class="docutils literal notranslate"><span class="pre">Linear</span></code> (the default value) as function, for the <code class="docutils literal notranslate"><span class="pre">Output</span></code>, we will assign a Logistic function. Following machine learning conventions, we will use the term <code class="docutils literal notranslate"><span class="pre">layer</span></code> to refer to these mechanisms.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>input_layer = pnl.ProcessingMechanism(name=&quot;Input&quot;, input_shapes=2)
+output_layer = pnl.ProcessingMechanism(name=&quot;Output&quot;, input_shapes=2, function=pnl.Logistic)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="compositions">
+<h3>Compositions<a class="headerlink" href="#compositions" title="Link to this heading">#</a></h3>
+<p>We can now combine these two layers into a <code class="docutils literal notranslate"><span class="pre">Compositions</span></code> object. First, we will define a <code class="docutils literal notranslate"><span class="pre">pathway</span></code> via a list. When we give this pathway to PsyNeuLink it will automatically create a <code class="docutils literal notranslate"><span class="pre">MappingProjection</span></code> between the two layers with reasonable default parameters. In this case, it will create a identity matrix (2x2) wiring the output-port of the <code class="docutils literal notranslate"><span class="pre">input_layer</span></code> to the input-port of the <code class="docutils literal notranslate"><span class="pre">output_layer</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>in_out_pathway = [input_layer, output_layer]
+simple_comp = pnl.Composition(name=&quot;simple_comp&quot;, pathways=[in_out_pathway]) # Note: pathways expects a list of lists (or pathways
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can execute mechanisms individually by passing an array of the appropriate size:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>input_layer.execute([0, 1])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also execute the entire composition by passing an array to the <code class="docutils literal notranslate"><span class="pre">run</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>simple_comp.run([0, 1])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.5       , 0.73105858]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>or with a list of inputs. The results are stored in the <code class="docutils literal notranslate"><span class="pre">results</span></code> attribute of the compositions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>simple_comp.run([[0, 1], [1, 0], [0.5, 0.5]])
+simple_comp.results # Note this also shows the results of the previous run (when running this multiple times the results will be appended)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[0.5       , 0.73105858]],
+
+       [[0.5       , 0.73105858]],
+
+       [[0.73105858, 0.5       ]],
+
+       [[0.62245933, 0.62245933]]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="show-graph">
+<h3>Show Graph<a class="headerlink" href="#show-graph" title="Link to this heading">#</a></h3>
+<p>A very handy feature of PsyNeuLink is the ability to visualize the composition as a graph:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>simple_comp.show_graph(output_fmt=&#39;jupyter&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/2b01391a4baea70a3cb7af4fbf6e48c596b9ac196c3aa82cedf1d9bd39db081a.svg" src="../../../_images/2b01391a4baea70a3cb7af4fbf6e48c596b9ac196c3aa82cedf1d9bd39db081a.svg" />
+</div>
+</div>
+<p>The show graph function has many options to customize the output. For example, we can show a more detailed view of the nodes by setting <code class="docutils literal notranslate"><span class="pre">show_node_structure=True</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>simple_comp.show_graph(output_fmt=&#39;jupyter&#39;, show_node_structure=True)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/62ce2d1a3775178216a5de5450a0ff2c64e5ad948e0abad148f020f9e496228b.svg" src="../../../_images/62ce2d1a3775178216a5de5450a0ff2c64e5ad948e0abad148f020f9e496228b.svg" />
+</div>
+</div>
+</section>
+<section id="projections">
+<h3>Projections<a class="headerlink" href="#projections" title="Link to this heading">#</a></h3>
+<p>So far we have only implicitly created a <code class="docutils literal notranslate"><span class="pre">MappingProjection</span></code> by passing a list of mechanisms as a <code class="docutils literal notranslate"><span class="pre">pathway</span></code>. However, if we want more control over the projection, we can create it explicitly. To do so, we define a weight matrix and pass it to the <code class="docutils literal notranslate"><span class="pre">MappingProjection</span></code> constructor. The weight matrix needs to have a shape that is compatible with the output-port of the sender mechanism and the input-port of the receiver mechanism. In this case, both layers have 2 input- and output-ports, so we can use a 2x2 matrix (To make it easier to see, we will use input and output layers with linear identity functions):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>input_layer = pnl.ProcessingMechanism(name=&quot;Input&quot;, input_shapes=2)
+output_layer = pnl.ProcessingMechanism(name=&quot;Output&quot;, input_shapes=2)
+
+# matrix is defined as a list of matrix columns
+matrix = [[1, 2],  # weights from input_layer[0] to output_layer[0, 1]
+          [3, 4]]  # weights from input_layer[1] to output_layer[0, 1]
+
+projection = pnl.MappingProjection(matrix=matrix)
+
+# Here we show another way of adding a pathway after the composition has been created
+simple_comp = pnl.Composition(name=&quot;simple_comp&quot;)
+simple_comp.add_linear_processing_pathway([input_layer, projection, output_layer])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;psyneulink.core.compositions.pathway.Pathway at 0x350682790&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we can run the composition</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>simple_comp.run([0, 1])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3., 4.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, the output can be understood as matrix multiplication between</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 3 \\
+2 &amp; 4
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+3 \\
+4
+\end{bmatrix}
+\end{split}\]</div>
+<details>
+<summary>
+What is the output of the composition if we run it with input `[1, 1]`?
+</summary>
+$$
+\begin{bmatrix}
+1 & 3 \\
+2 & 4
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+4 \\
+6
+\end{bmatrix}
+$$
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>simple_comp.run([1, 1])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[4., 6.]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="linear-stroop">
+<h2>2. Linear Stroop<a class="headerlink" href="#linear-stroop" title="Link to this heading">#</a></h2>
+<p>With the above basics, we can already implement simple models. Here, we will implement a simple version that aims to explain conflict:</p>
+<p><img alt="multitasking" src="https://raw.githubusercontent.com/AutoResearch/ASDMB-Workshop/main/ASDMB-book/_static/img/practical-sessions/spongebob-spongebob-squarepants.gif" /></p>
+<p>Pat your head and rub your belly at the same time. Unless you have practiced this odd exercise you will get conflict between the motor commands and quickly end up rubbing your head while also rubbing your belly, OR patting your belly while also patting your head. As a more difficult exercise, while sitting, lift your right foot and repeatedly rotate it clockwise while simultaneously tracing a counterclockwise circle in the air with your right hand.</p>
+<p>These are examples of <strong>cognitive conflict</strong>. When you are trying to do two things ar once conflict can arise. Other things however, you can do simultaneously without experiencing conflict. For example, you can walk and have a conversation at the same time, or you can eat and watch TV at the same time.</p>
+<p>The Stroop Model explains this conflict with shared pathways (or representations). In the classical Stroop Task, the participants are asked to name the color of the ink a word is printed in. The word itself also has the meaning of a color. For example, the word “RED” printed in blue ink. Our model proposes that both recognizing a color and reading a color word share common representations (in our case in the output layer). When the color and meaning match, these representation “work together” and the task is easy. However, when they mismatch, they “work against each other” and cause conflict.</p>
+<p>Don’t worry if this is not clear yet, it will be once we have implemented the model:</p>
+<section id="task-model">
+<h3>Task &amp; Model<a class="headerlink" href="#task-model" title="Link to this heading">#</a></h3>
+<p>We will implement a simple version of the Stroop model. The task consists of 2x2 conditions:</p>
+<ul class="simple">
+<li><p>word: RED, GREEN -&gt; one-hot encoded as [1, 0] and [0, 1]</p></li>
+<li><p>color: red, green -&gt; one-hot encoded as [1, 0] and [0, 1]</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p><span style="color:red">RED</span> -&gt; word: [1, 0], color: [1, 0]</p></li>
+<li><p><span style="color:green">RED</span> -&gt; word: [1, 0], color: [0, 1]</p></li>
+<li><p><span style="color:green">GREEN</span> -&gt; word: [0, 1], color: [0, 1]</p></li>
+<li><p><span style="color:red">GREEN</span> -&gt; word: [0, 1], color: [1, 0]</p></li>
+</ul>
+<p>To model the more “automatic” response to word reading, we will give the word input a stronger connection to the output layer then the color input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Some CONSTANTS: Strength of processing pathways:
+WORD_STRENGTH = 3
+COLOR_STRENGTH = 2
+TASK_STRENGTH = 4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def get_linear_stroop():
+    # input layers (shape == 2 for one-hot encoded inputs)
+    word_input = pnl.ProcessingMechanism(name=&quot;Word&quot;, input_shapes=2)
+    color_input = pnl.ProcessingMechanism(name=&quot;Color&quot;, input_shapes=2)
+
+    # output layer (shape == 2 for one-hot encoded output red or green)
+    response = pnl.ProcessingMechanism(name=&quot;Response&quot;, input_shapes=2)
+
+    # create the compositions
+    comp = pnl.Composition(name=&quot;Linear Stroop&quot;)
+
+    # Create the projections
+    # here we define a simple lateral inhibition matrix (i.e., input to red inhibits green and vice versa)
+    inhibition_matrix = np.array(
+        [[1, -1.],
+         [-1., 1]])
+
+    # scale the inhibition matrix by the processing strength
+    word_processing_matrix = WORD_STRENGTH * inhibition_matrix
+    color_processing_matrix = COLOR_STRENGTH * inhibition_matrix
+
+    # create projections
+    word_response_projection = pnl.MappingProjection(matrix=word_processing_matrix)
+    color_response_projection = pnl.MappingProjection(matrix=color_processing_matrix)
+
+    # Add pathways to the composition
+    comp.add_linear_processing_pathway([
+        word_input, word_response_projection, response
+    ])
+
+    comp.add_linear_processing_pathway([color_input, color_response_projection, response])
+    return comp, word_input, color_input
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the graph of the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>linear_stroop, _, _= get_linear_stroop()
+
+linear_stroop.show_graph(output_fmt=&#39;jupyter&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/818626c4846684755858b803b38ce0db0c1b44cd5f8fc135d3253e2b30557964.svg" src="../../../_images/818626c4846684755858b803b38ce0db0c1b44cd5f8fc135d3253e2b30557964.svg" />
+</div>
+</div>
+<p>We see, that both color and word input project to the same output layer. Let’s see what happens for different inputs. Here, we define the inputs as dictionary with the keys being the input layers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>linear_stroop, word_input, color_input = get_linear_stroop()
+
+# Congruent Stimuli
+print(f&#39;{&quot;*&quot;*10}Congruent Stimuli{&quot;*&quot;*10}&#39;)
+# RED written in red:
+rr = {word_input: [1, 0], color_input: [1, 0]}
+response_r, response_g = linear_stroop.run(rr)[0]
+print(&#39;RED written in red:\n&#39;,
+      f&#39;Red response activation: {response_r}\n&#39;
+      f&#39;Green response activation: {response_g}\n&#39;)
+
+# GREEN written in green:
+gg = {word_input: [0, 1], color_input: [0, 1]}
+response_r, response_g = linear_stroop.run(gg)[0]
+print(&#39;GREEN written in green:\n&#39;,
+      f&#39;Red response activation: {response_r}\n&#39;
+      f&#39;Green response activation: {response_g}\n&#39;)
+
+# Incongruent Stimuli
+print(f&#39;{&quot;*&quot;*10}Incongruent Stimuli{&quot;*&quot;*10}&#39;)
+# RED written in green:
+rg = {word_input: [1, 0], color_input: [0, 1]}
+response_r, response_g = linear_stroop.run(rg)[0]
+print(&#39;RED written in green:\n&#39;,
+      f&#39;Red response activation: {response_r}\n&#39;
+      f&#39;Green response activation: {response_g}\n&#39;)
+
+# green written in red:
+gr = {word_input: [0, 1], color_input: [1, 0]}
+response_r, response_g = linear_stroop.run(gr)[0]
+print(&#39;GREEN written in red:\n&#39;,
+      f&#39;Red response activation: {response_r}\n&#39;
+      f&#39;Green response activation: {response_g}\n&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********Congruent Stimuli**********
+RED written in red:
+ Red response activation: 5.0
+Green response activation: -5.0
+
+GREEN written in green:
+ Red response activation: -5.0
+Green response activation: 5.0
+
+**********Incongruent Stimuli**********
+RED written in green:
+ Red response activation: 1.0
+Green response activation: -1.0
+
+GREEN written in red:
+ Red response activation: -1.0
+Green response activation: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above model can explain “congruency” effects. When the color and word match (congruent stimuli) the difference between the two output units is larger than when they mismatch (incongruent stimuli).</p>
+</section>
+<section id="adding-a-drift-diffusion-module">
+<h3>Adding A Drift Diffusion Module<a class="headerlink" href="#adding-a-drift-diffusion-module" title="Link to this heading">#</a></h3>
+<p>The numbers are hard to interpret, and we would like to add some stochasticity: “It is more likely to be wrong on incongruent trials, and it is slower”. To model this, we can add a Drift Diffusion Module to the response:</p>
+<p><img alt="ddm" src="https://raw.githubusercontent.com/AutoResearch/ASDMB-Workshop/main/ASDMB-book/_static/img/practical-sessions/ddm.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def get_ddm_stroop():
+
+    # input layers (shape == 2 for one-hot encoded inputs)
+    word_input = pnl.ProcessingMechanism(name=&quot;Word&quot;, input_shapes=2)
+    color_input = pnl.ProcessingMechanism(name=&quot;Color&quot;, input_shapes=2)
+
+    # output layer (shape == 2 for one-hot encoded output red or green)
+    output_layer = pnl.ProcessingMechanism(name=&quot;Output&quot;, input_shapes=2)
+
+    # DDM for decision making
+    decision_layer = pnl.DDM(
+        name=&#39;Decision&#39;,
+        input_format=pnl.ARRAY,
+        function=pnl.DriftDiffusionIntegrator(
+            noise=.5,
+            rate=.05,
+            threshold=1.
+        ),
+        reset_stateful_function_when=pnl.AtTrialStart())
+
+    # create the compositions
+    comp = pnl.Composition(name=&quot;DDM Stroop&quot;)
+
+    # Create the projections
+
+    identity_matrix = np.array(
+        [[1, -1],
+         [-1, 1]])
+
+    # scale the inhibition matrix by the processing strength
+    word_processing_matrix = WORD_STRENGTH * identity_matrix
+    color_processing_matrix = COLOR_STRENGTH * identity_matrix
+
+    # create projections
+    word_response_projection = pnl.MappingProjection(matrix=word_processing_matrix)
+    color_response_projection = pnl.MappingProjection(matrix=color_processing_matrix)
+
+    # Add pathways to the composition
+    comp.add_linear_processing_pathway([
+        word_input, word_response_projection, output_layer
+    ])
+
+    comp.add_linear_processing_pathway([color_input, color_response_projection, output_layer])
+
+    comp.add_linear_processing_pathway([output_layer, decision_layer])
+
+    return comp, word_input, color_input
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the graph of the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>ddm_stroop , _, _ = get_ddm_stroop()
+
+ddm_stroop.show_graph(output_fmt=&#39;jupyter&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/a3a2faa6b631be44ffffa2ad8b5dfa9c584c980bc807a37ca5ff29b455c661fd.svg" src="../../../_images/a3a2faa6b631be44ffffa2ad8b5dfa9c584c980bc807a37ca5ff29b455c661fd.svg" />
+</div>
+</div>
+<p>Now, we can simulate 100 congruent and 100 incongruent trials and look at the rt distributions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>ddm_stroop, word_input, color_input = get_ddm_stroop()
+
+# example congruent stimulus
+rr = {word_input: [1, 0], color_input: [1, 0]}
+
+ddm_stroop.run(rr, num_trials= 5000)
+
+results = ddm_stroop.results
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &gt; 0]  # decision == 1 -&gt; red
+decision_time_error = [r[1][0] for r in results if r[0][0] &lt; 0] # decision == -1 -&gt; green
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in Congruent Trials (RED in red)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/7faa78e843fc6331af9827fe18c065729e17ce770d2997185b9c9649c4889476.png" src="../../../_images/7faa78e843fc6331af9827fe18c065729e17ce770d2997185b9c9649c4889476.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 2.855040322580645
+Accuracy: 0.992
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>ddm_stroop, word_input, color_input = get_ddm_stroop()
+
+# example congruent stimulus
+gg = {word_input: [0, 1], color_input: [0, 1]}
+
+ddm_stroop.run(gg, num_trials= 5000)
+
+results = ddm_stroop.results
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &lt; 0]  # decision == 1 -&gt; green
+decision_time_error = [r[1][0] for r in results if r[0][0] &gt; 0] # decision == -1 -&gt; red
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in Congruent Trials (GREEN in green)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/d7cc7e5fdcb86e4b43bea39d17469f57f469d8ae09e56c3e6712f66a87d948ee.png" src="../../../_images/d7cc7e5fdcb86e4b43bea39d17469f57f469d8ae09e56c3e6712f66a87d948ee.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 2.7992347966169957
+Accuracy: 0.9932
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>ddm_stroop, word_input, color_input = get_ddm_stroop()
+
+# example congruent stimulus
+rg = {word_input: [1, 0], color_input: [0, 1]}
+
+ddm_stroop.run(rg, num_trials= 5000)
+
+results = ddm_stroop.results
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &gt; 0]  # decision == 1 -&gt; red
+decision_time_error = [r[1][0] for r in results if r[0][0] &lt; 0] # decision == -1 -&gt; green
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in Incongruent Trials (RED in green)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/4563d8515c7cfb3eddd9e077bfafc9767595b264fc774bbc7e4eb243057012ff.png" src="../../../_images/4563d8515c7cfb3eddd9e077bfafc9767595b264fc774bbc7e4eb243057012ff.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 6.513469827586207
+Accuracy: 0.7424
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>ddm_stroop, word_input, color_input = get_ddm_stroop()
+
+# example congruent stimulus
+gr = {word_input: [0, 1], color_input: [1, 0]}
+
+ddm_stroop.run(gr, num_trials= 5000)
+
+results = ddm_stroop.results
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &lt; 0]  # decision == 1 -&gt; red
+decision_time_error = [r[1][0] for r in results if r[0][0] &gt; 0] # decision == -1 -&gt; green
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in Incongruent Trials (GREEN in red)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/3f50df83ccd998306653f50ca814707304484b0894a4d79ed7e2357890f363dd.png" src="../../../_images/3f50df83ccd998306653f50ca814707304484b0894a4d79ed7e2357890f363dd.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 6.337127371273713
+Accuracy: 0.738
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="stroop-with-task-demand">
+<h2>3. Stroop with Task Demand<a class="headerlink" href="#stroop-with-task-demand" title="Link to this heading">#</a></h2>
+<p>Can you name the color?</p>
+<p><img alt="stroop-animated" src="https://raw.githubusercontent.com/AutoResearch/ASDMB-Workshop/main/ASDMB-book/_static/img/practical-sessions/stroop-animated.gif" /></p>
+<p>The above model suggests that the word-naming process will always overwrite the color-naming. But we can tell from experience that humans can clearly <em>surpress</em> the urge to name the word and instead name the color (allthough slower and more error-prone).</p>
+<p>To model this, we add a <code class="docutils literal notranslate"><span class="pre">task_demand</span></code> layer that adds activation to either (<em>both</em>) word units (RED and GREEN) or (<em>both</em>) color units (red and green). To do so, we also add a hidden word and color layers that are calculated from the respective input layer plus the new <code class="docutils literal notranslate"><span class="pre">task_demand</span></code> layer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def get_task_demand_stroop():
+    word_input = pnl.ProcessingMechanism(name=&quot;Word In&quot;, input_shapes=2)
+    color_input = pnl.ProcessingMechanism(name=&quot;Color In&quot;, input_shapes=2)
+
+    # A new task demand unit ([1,0] -&gt; word naming, [0, 1] -&gt;
+    task_demand_input = pnl.ProcessingMechanism(name=&quot;Task Demand&quot;, input_shapes=2)
+
+    word_hidden = pnl.ProcessingMechanism(name=&quot;Word Hidden&quot;, input_shapes=2, function=pnl.Logistic(bias=-4))
+    color_hidden = pnl.ProcessingMechanism(name=&quot;Color Hidden&quot;, input_shapes=2, function=pnl.Logistic(bias=-4))
+
+    # output layer (shape == 2 for one-hot encoded output red or green)
+    output_layer = pnl.ProcessingMechanism(name=&quot;Output&quot;, input_shapes=2)
+
+    # DDM for decision making
+    decision_layer = pnl.DDM(
+        name=&#39;Decision&#39;,
+        input_format=pnl.ARRAY,
+        function=pnl.DriftDiffusionIntegrator(
+            noise=.5,
+            rate=.05,
+            threshold=1.
+        ),
+        reset_stateful_function_when=pnl.AtTrialStart())
+
+    # create the compositions
+    composition = pnl.Composition(name=&quot;Linear Stroop&quot;)
+
+    # Create the projections
+
+    identity_matrix = np.array(
+        [[1, -1],
+         [-1, 1]])
+    word_processing_matrix = WORD_STRENGTH * identity_matrix
+    color_processing_matrix = COLOR_STRENGTH * identity_matrix
+
+    # create projections
+    word_hidden_projection = pnl.MappingProjection(matrix=word_processing_matrix)
+    color_hidden_projection = pnl.MappingProjection(matrix=color_processing_matrix)
+
+
+    # Add pathways to the composition
+    composition.add_linear_processing_pathway([word_input,word_hidden_projection, word_hidden])
+
+    composition.add_linear_processing_pathway([color_input,color_hidden_projection, color_hidden])
+
+
+    # task -&gt; hidden
+    task_word_hidden_matrix = TASK_STRENGTH * np.array(
+        [[1, 1],
+         [0, 0]])
+    task_color_hidden_matrix = TASK_STRENGTH * np.array(
+        [[0, 0],
+         [1, 1]]
+    )
+
+    task_word_hidden_projection = pnl.MappingProjection(matrix=task_word_hidden_matrix)
+    task_color_hidden_projection = pnl.MappingProjection(matrix=task_color_hidden_matrix)
+
+    composition.add_linear_processing_pathway([
+        task_demand_input,
+        task_word_hidden_projection,
+        word_hidden
+    ])
+
+    composition.add_linear_processing_pathway([
+        task_demand_input,
+        task_color_hidden_projection,
+        color_hidden
+    ])
+
+    # scale the inhibition matrix by the processing strength
+    word_matrix = WORD_STRENGTH * identity_matrix
+    color_matrix = COLOR_STRENGTH * identity_matrix
+
+    # create projections
+    word_projection = pnl.MappingProjection(matrix=word_matrix)
+    color_projection = pnl.MappingProjection(matrix=color_matrix)
+
+    # hidden -&gt; output
+    composition.add_linear_processing_pathway([
+        word_hidden, word_projection, output_layer
+    ])
+
+    composition.add_linear_processing_pathway([
+        color_hidden,color_projection, output_layer
+    ])
+
+    # output -&gt; decision
+
+    composition.add_linear_processing_pathway([output_layer, decision_layer])
+
+    return composition, word_input, color_input, task_demand_input
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the new compostions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>comp, _, _, _ = get_task_demand_stroop()
+comp.show_graph(output_fmt=&#39;jupyter&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/4386edb8adac1bbb59e112278496cb99bb0232da1b1a913fda3cfe1d75c1f48e.svg" src="../../../_images/4386edb8adac1bbb59e112278496cb99bb0232da1b1a913fda3cfe1d75c1f48e.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>comp, word_input, color_input, task_input = get_task_demand_stroop()
+
+# example congruent stimulus (word meaning)
+rr_w = {word_input: [1, 0], color_input: [1, 0], task_input: [1, 0]}
+
+comp.run(rr_w, num_trials= 1000)
+
+results = comp.results# RED written in red
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &gt; 0]
+decision_time_error = [r[1][0] for r in results if r[0][0] &lt; 0]
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in Congruent Trials (word reading)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+average_rt_congruent_word_reading = np.mean(decision_times_correct)
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/8a016640a2b7da1e3f460a006437274bad3f8a88f81a42060ca17ae42451bb75.png" src="../../../_images/8a016640a2b7da1e3f460a006437274bad3f8a88f81a42060ca17ae42451bb75.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 4.090521831735889
+Accuracy: 0.939
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>comp, word_input, color_input, task_input = get_task_demand_stroop()
+
+# example incongruent stimulus (word reading)
+rg_w = {word_input: [1, 0], color_input: [0, 1], task_input: [1, 0]}
+
+comp.run(rg_w, num_trials= 1000)
+
+results = comp.results# RED written in red
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &gt; 0]
+decision_time_error = [r[1][0] for r in results if r[0][0] &lt; 0]
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in Incongruent Trials (color naming)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+average_rt_incongruent_word_reading = np.mean(decision_times_correct)
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/52bdef61c059e4c2d6a1146cafea2d512a3215fea03f7d6fc769c1eef58616a4.png" src="../../../_images/52bdef61c059e4c2d6a1146cafea2d512a3215fea03f7d6fc769c1eef58616a4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 4.716157205240175
+Accuracy: 0.916
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>comp, word_input, color_input, task_input = get_task_demand_stroop()
+
+# example congruent stimulus (color naming)
+rr_c = {word_input: [1, 0], color_input: [1, 0], task_input: [0, 1]}
+
+comp.run(rr_c, num_trials= 1000)
+
+results = comp.results# RED written in red
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &gt; 0]
+decision_time_error = [r[1][0] for r in results if r[0][0] &lt; 0]
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in congruent Trials (word meaning)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+average_rt_congruent_color_naming = np.mean(decision_times_correct)
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/afc204dc83008e5d072ff18ff35ad48d0181c90bf23decae0ca30517367ea142.png" src="../../../_images/afc204dc83008e5d072ff18ff35ad48d0181c90bf23decae0ca30517367ea142.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 4.934426229508197
+Accuracy: 0.915
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>comp, word_input, color_input, task_input = get_task_demand_stroop()
+
+# example incongruent stimulus (color naming)
+gr_c = {word_input: [0, 1], color_input: [1, 0], task_input: [0, 1]}
+
+comp.run(gr_c, num_trials= 1000)
+
+results = comp.results# RED written in red
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &gt; 0]
+decision_time_error = [r[1][0] for r in results if r[0][0] &lt; 0]
+
+plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+
+plt.title(&#39;Response Time Distribution in congruent Trials (word meaning)&#39;)
+plt.ylabel(&#39;Frequency&#39;)
+plt.xlabel(&#39;Response Time&#39;)
+plt.legend()
+plt.show()
+average_rt_incongruent_color_naming = np.mean(decision_times_correct)
+print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/13b08cfa8673b90faaadd568f9137ef6239c776a6de25de4980bcb68287c726d.png" src="../../../_images/13b08cfa8673b90faaadd568f9137ef6239c776a6de25de4980bcb68287c726d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average correct RT: 6.677966101694915
+Accuracy: 0.649
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Congruency effects:
+
+print(&#39;Congruency Effects&#39;)
+print(&#39;Word Reading:&#39;, average_rt_incongruent_word_reading - average_rt_congruent_word_reading)
+print(&#39;Congruency Effects&#39;)
+print(&#39;Color Naming:&#39;, average_rt_incongruent_color_naming - average_rt_congruent_color_naming)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Congruency Effects
+Word Reading: 0.6256353735042861
+Congruency Effects
+Color Naming: 1.7435398721867186
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="stroop-with-conflict-monitoring">
+<h2>4. Stroop With Conflict Monitoring<a class="headerlink" href="#stroop-with-conflict-monitoring" title="Link to this heading">#</a></h2>
+<p>Remember: For our closed loop (later tonight) we want to investigate weather humans can adapt cognitive control. We want to see if more incongruent trials lead to less interference. However, the above model can not capture any sequential or adaptive effects.</p>
+<p>To model this, we can add a control mechanism that monitors <em>conflict</em> and adapts how much task demand is applied to the word and color pathways. The idea: If we experience little conflict, for example because all the trials are word reading trials, or all of them are incongruent, we don’t <em>need</em> the task_demand unit to answer correctly. Therefore, we can reduce its influence. However, if we experience a lot of conflict, for example because all the trials are reconfiguring, color naming trials, we need to increase the influence of the task_demand unit to answer correctly.</p>
+<p>In our model, we add a control that monitors the <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layer</span></code> for conflict (i.e., both output units are highly activated). We also add a <code class="docutils literal notranslate"><span class="pre">task_hidden</span></code> unit with a logistic function. Its gain is modulated by the control mechanism. This way, the control mechanism can increase or decrease the influence of the task demand unit on the hidden word and color layers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def get_conflict_monitoring_stroop():
+    word_input = pnl.ProcessingMechanism(name=&quot;Word In&quot;, input_shapes=2)
+    color_input = pnl.ProcessingMechanism(name=&quot;Color In&quot;, input_shapes=2)
+    task_demand_input = pnl.ProcessingMechanism(name=&quot;Task Demand&quot;, input_shapes=2)
+
+    word_hidden = pnl.ProcessingMechanism(name=&quot;Word Hidden&quot;, input_shapes=2, function=pnl.Logistic(bias=-4))
+    color_hidden = pnl.ProcessingMechanism(name=&quot;Color Hidden&quot;, input_shapes=2, function=pnl.Logistic(bias=-4))
+    # new task hidden that is modulated
+    task_hidden = pnl.ProcessingMechanism(name=&quot;Task Hidden&quot;, input_shapes=2, function=pnl.Logistic(bias=-.5))
+
+    # output layer (shape == 2 for one-hot encoded output red or green)
+    output_layer = pnl.ProcessingMechanism(name=&quot;Output&quot;, input_shapes=2)
+
+    control = pnl.ControlMechanism(name=&#39;Control&#39;,
+                                   objective_mechanism=pnl.ObjectiveMechanism(
+                                       name=&#39;Conflict Monitor&#39;,
+                                       monitor=output_layer,
+                                       function=pnl.Energy(input_shapes=2,
+                                                           matrix=[[0, -0.5], [-0.5, 0]])),
+                                   default_allocation=[1.],
+                                   control_signals=[(pnl.GAIN, task_hidden)])
+
+    # DDM for decision making
+    decision_layer = pnl.DDM(
+        name=&#39;Decision&#39;,
+        input_format=pnl.ARRAY,
+        function=pnl.DriftDiffusionIntegrator(
+            noise=.5,
+            rate=.05,
+            threshold=1.
+        ),
+        reset_stateful_function_when=pnl.AtTrialStart())
+
+    # create the compositions
+    composition = pnl.Composition(name=&quot;Conflict Stroop&quot;)
+
+    # Create the projections
+
+    identity_matrix = np.array(
+        [[1, -1],
+         [-1, 1]])
+
+    # scale the inhibition matrix by the processing strength
+    word_hidden_matrix = WORD_STRENGTH * identity_matrix
+    color_hidden_matrix = COLOR_STRENGTH * identity_matrix
+
+    # create projections
+    word_hidden_projection = pnl.MappingProjection(matrix=word_hidden_matrix)
+    color_hidden_projection = pnl.MappingProjection(matrix=color_hidden_matrix)
+
+    # Add pathways to the composition
+    composition.add_linear_processing_pathway([
+        word_input, word_hidden_projection, word_hidden
+    ])
+
+    composition.add_linear_processing_pathway([
+        color_input, color_hidden_projection, color_hidden])
+
+    # task -&gt; task_hidden
+    composition.add_linear_processing_pathway([task_demand_input, task_hidden])
+
+    # task_hidden -&gt; hidden (word and color)
+    task_hidden_word_hidden_matrix = TASK_STRENGTH * np.array(
+        [[1, 1],
+         [0, 0]])
+    task_hidden_color_hidden_matrix = TASK_STRENGTH * np.array(
+        [[0, 0],
+         [1, 1]]
+    )
+
+    task_word_hidden_projection = pnl.MappingProjection(matrix=task_hidden_word_hidden_matrix)
+    task_color_hidden_projection = pnl.MappingProjection(matrix=task_hidden_color_hidden_matrix)
+
+    composition.add_linear_processing_pathway([
+        task_hidden,
+        task_word_hidden_projection,
+        word_hidden
+    ])
+
+    composition.add_linear_processing_pathway([
+        task_hidden,
+        task_color_hidden_projection,
+        color_hidden
+    ])
+
+    word_matrix = WORD_STRENGTH * identity_matrix
+    color_matrix = COLOR_STRENGTH * identity_matrix
+
+    # create projections
+    word_projection = pnl.MappingProjection(matrix=word_matrix)
+    color_projection = pnl.MappingProjection(matrix=color_matrix)
+
+    # hidden -&gt; output
+    composition.add_linear_processing_pathway([
+        word_hidden, output_layer
+    ])
+
+    composition.add_linear_processing_pathway([
+        color_hidden, output_layer
+    ])
+
+    # output -&gt; decision
+
+    composition.add_linear_processing_pathway([output_layer, decision_layer])
+
+    composition.add_controller(control)
+
+    def print_after():
+        print(&#39;*&#39; * 40)
+        print(f&#39;\t\t\t Trial&#39;)
+        print(f&#39;\tinput:\t\tword  color  task&#39;)
+        print(f&#39;\t\t\t {word_input.value[0]}    {color_input.value[0]}    {task_demand_input.value[0]}&#39;)
+        print(f&#39;\t\t\t {word_hidden.value[0]}    {color_hidden.value[0]}    {task_hidden.value[0]}&#39;)
+        print(f&#39;\t\t\t\tcolor  word&#39;)
+        print(f&#39;\ttask:\t\t{task_hidden.value[0]}&#39;)
+        print(f&#39;\ttask gain:\t   {task_hidden.parameter_ports[pnl.GAIN].value}&#39;)
+        print(f&#39;\t\t\t\tred   green&#39;)
+        print(f&#39;\toutput:\t\t{output_layer.value[0]}&#39;)
+        print(f&#39;\tdecision:\t{decision_layer.value[0]}{decision_layer.value[1]}&#39;)
+        print(f&#39;\tconflict:\t  {control.objective_mechanism.value[0]}&#39;)
+
+    return composition, word_input, color_input, task_demand_input, print_after
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>comp, _, _, _, _ = get_conflict_monitoring_stroop()
+comp.show_graph(output_fmt=&#39;jupyter&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/2693a77c7fd6a72e02d14bc311ddce61ef46a1b28449b88bf8554acb0d68ac25.svg" src="../../../_images/2693a77c7fd6a72e02d14bc311ddce61ef46a1b28449b88bf8554acb0d68ac25.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>comp, word_input, color_input, task_input, print_after = get_conflict_monitoring_stroop()
+
+# example incongruent stimulus (word meaning)
+
+
+rg_w = {word_input: [1, 0], color_input: [0, 1], task_input: [0, 1]}
+gg_c = {word_input: [1, 0], color_input: [1, 0], task_input: [1, 0]}
+
+trials = {word_input: [], color_input: [], task_input: []}
+
+def add_trial(trial_dict, num=100):
+    for _ in range(num):
+        trials[word_input].append(trial_dict[word_input])
+        trials[color_input].append(trial_dict[color_input])
+        trials[task_input].append(trial_dict[task_input])
+
+import random
+for _ in range(10):
+    if random.random() &gt; 0.1:
+        add_trial(rg_w, num=1)
+    else:
+        add_trial(gg_c, num=1)
+
+
+
+comp.run(trials, call_after_trial=print_after)
+
+results = comp.results# RED written in red
+
+decision_times_correct = [r[1][0] for r in results if r[0][0] &lt; 0]
+decision_time_error = [r[1][0] for r in results if r[0][0] &gt; 0]
+#
+# plt.hist(decision_times_correct, bins=100, alpha=0.6, color=&#39;green&#39;, label=&#39;Correct&#39;)
+# plt.hist(decision_time_error, bins=100, alpha=0.6, color=&#39;red&#39;, label=&#39;Error&#39;)
+#
+# plt.title(&#39;Response Time Distribution in Incongruent Trials (word reading)&#39;)
+# plt.ylabel(&#39;Frequency&#39;)
+# plt.xlabel(&#39;Response Time&#39;)
+# plt.legend()
+# plt.show()
+# average_rt_incongruent_word_reading = np.mean(decision_times_correct)
+# print(f&#39;Average correct RT: {np.mean(decision_times_correct)}&#39;)
+# print(f&#39;Accuracy: {len(decision_times_correct) / (len(decision_times_correct) + len(decision_time_error))}&#39;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.62484461 0.00411154]    [0.02902445 0.62006811]    [0.37754067 0.62245933]
+				color  word
+	task:		[0.37754067 0.62245933]
+	task gain:	   [1.]
+				red   green
+	output:		[0.65386906 0.62417965]
+	decision:	[-1.][17.]
+	conflict:	  [0.20406588]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.71054974 0.0060481 ]    [0.01987816 0.52546408]    [0.47451387 0.52548613]
+				color  word
+	task:		[0.47451387 0.52548613]
+	task gain:	   [0.20406588]
+				red   green
+	output:		[0.7304279  0.53151218]
+	decision:	[-1.][3.]
+	conflict:	  [0.19411566]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.71156937 0.00607801]    [0.0197817  0.52422644]    [0.47575457 0.52424543]
+				color  word
+	task:		[0.47575457 0.52424543]
+	task gain:	   [0.19411566]
+				red   green
+	output:		[0.73135106 0.53030445]
+	decision:	[1.][15.]
+	conflict:	  [0.19391936]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.71158946 0.0060786 ]    [0.0197798  0.52420202]    [0.47577905 0.52422095]
+				color  word
+	task:		[0.47577905 0.52422095]
+	task gain:	   [0.19391936]
+				red   green
+	output:		[0.73136926 0.53028062]
+	decision:	[-1.][2.]
+	conflict:	  [0.19391547]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.71158986 0.00607861]    [0.01977976 0.52420154]    [0.47577954 0.52422046]
+				color  word
+	task:		[0.47577954 0.52422046]
+	task gain:	   [0.19391547]
+				red   green
+	output:		[0.73136962 0.53028015]
+	decision:	[1.][6.]
+	conflict:	  [0.19391539]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.71158987 0.00607861]    [0.01977976 0.52420153]    [0.47577955 0.52422045]
+				color  word
+	task:		[0.47577955 0.52422045]
+	task gain:	   [0.19391539]
+				red   green
+	output:		[0.73136963 0.53028014]
+	decision:	[-1.][11.]
+	conflict:	  [0.19391539]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.71158987 0.00607861]    [0.01977976 0.52420153]    [0.47577955 0.52422045]
+				color  word
+	task:		[0.47577955 0.52422045]
+	task gain:	   [0.19391539]
+				red   green
+	output:		[0.73136963 0.53028014]
+	decision:	[1.][9.]
+	conflict:	  [0.19391539]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [1. 0.]    [1. 0.]
+			 [0.7496754 0.0073687]    [0.47579847 0.01635258]    [0.52422045 0.47577955]
+				color  word
+	task:		[0.52422045 0.47577955]
+	task gain:	   [0.19391539]
+				red   green
+	output:		[1.22547387 0.02372128]
+	decision:	[-1.][5.]
+	conflict:	  [0.0145349]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [0. 1.]    [0. 1.]
+			 [0.72962732 0.00664471]    [0.01811502 0.50181685]    [0.49818315 0.50181685]
+				color  word
+	task:		[0.49818315 0.50181685]
+	task gain:	   [0.0145349]
+				red   green
+	output:		[0.74774234 0.50846156]
+	decision:	[1.][10.]
+	conflict:	  [0.19009912]
+****************************************
+			 Trial
+	input:		word  color  task
+			 [1. 0.]    [1. 0.]    [1. 0.]
+			 [0.74931796 0.00735479]    [0.47627332 0.01638323]    [0.52374452 0.47625548]
+				color  word
+	task:		[0.52374452 0.47625548]
+	task gain:	   [0.19009912]
+				red   green
+	output:		[1.22559128 0.02373802]
+	decision:	[1.][15.]
+	conflict:	  [0.01454655]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/practical-sessions/psyneulink"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright © 2025.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

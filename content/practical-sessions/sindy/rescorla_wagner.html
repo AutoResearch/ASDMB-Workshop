@@ -1,0 +1,721 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tutorial: Recovering Rescorla-Wagner Parameters from a Bandit Task using SINDy &#8212; Automated Scientific Discovery of Mind and Brain (ASDMB)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/schedule.css?v=e580d19a" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/practical-sessions/sindy/rescorla_wagner';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.svg" class="logo__image only-light" alt=""/>
+    <script>document.write(`<img src="../../../_static/logo.svg" class="logo__image only-dark" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">ASDMB</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../schedule.html">
+    Schedule
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Practical Sessions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../speakers.html">
+    Speakers
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/younesStrittmatter/princeton-ASDMB" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../schedule.html">
+    Schedule
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html">
+    Practical Sessions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../speakers.html">
+    Speakers
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/younesStrittmatter/princeton-ASDMB" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Tutorial:...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-recovering-rescorla-wagner-parameters-from-a-bandit-task-using-sindy">
+<h1>Tutorial: Recovering Rescorla-Wagner Parameters from a Bandit Task using SINDy<a class="headerlink" href="#tutorial-recovering-rescorla-wagner-parameters-from-a-bandit-task-using-sindy" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><a class="reference external" href="https://colab.research.google.com/github/AutoResearch/ASDMB-Workshop/blob/main/ASDMB-book/content/practical-sessions/sindy/rescorla_wagner.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+</div></blockquote>
+<p>This notebook demonstrates a more advanced application of SINDy for model discovery in cognitive science. We will simulate an agent learning in a classic psychological task (a two-armed bandit) and then use SINDy to recover the agent’s hidden learning parameters from its behavior.</p>
+<section id="the-goal">
+<h2>The Goal<a class="headerlink" href="#the-goal" title="Link to this heading">#</a></h2>
+<p>Our goal is to simulate behavioral data from a known cognitive model and then play the role of a scientist. Given only the agent’s ‘observable’ data (its internal value estimates over time), can we use SINDy to discover the mathematical rule it uses for learning and, from that rule, deduce its specific learning parameters?</p>
+</section>
+<section id="the-workflow">
+<h2>The Workflow<a class="headerlink" href="#the-workflow" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Define a Model &amp; Environment</strong>: We’ll create a <code class="docutils literal notranslate"><span class="pre">RescorlaWagnerAgent</span></code> and a <code class="docutils literal notranslate"><span class="pre">TwoArmedBandit</span></code> environment.</p></li>
+<li><p><strong>Generate Data</strong>: We’ll simulate agents performing the task to create a dataset.</p></li>
+<li><p><strong>Apply SINDy</strong>: We’ll use the <code class="docutils literal notranslate"><span class="pre">pysindy</span></code> library to analyze an agent’s learning trajectory.</p></li>
+<li><p><strong>Recover Parameters</strong>: We’ll interpret the SINDy model to extract the original learning rate (<code class="docutils literal notranslate"><span class="pre">α</span></code>) and reward magnitude (<code class="docutils literal notranslate"><span class="pre">λ</span></code>).</p></li>
+<li><p><strong>Visualize &amp; Compare</strong>: We’ll compare SINDy’s performance to a standard linear regression approach and visualize the results.</p></li>
+</ol>
+</section>
+<section id="step-1-setup-and-imports">
+<h2>Step 1: Setup and Imports<a class="headerlink" href="#step-1-setup-and-imports" title="Link to this heading">#</a></h2>
+<p>First, we’ll install the necessary packages if they are not already present and then import them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Run this cell if you don&#39;t have the packages installed
+!pip install pysindy scikit-learn pandas matplotlib scipy
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import pysindy as ps
+from scipy.integrate import solve_ivp
+from sklearn.linear_model import LinearRegression
+import warnings
+warnings.filterwarnings(&#39;ignore&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>class RescorlaWagnerAgent:
+    &quot;&quot;&quot;Agent implementing Rescorla-Wagner learning dynamics.&quot;&quot;&quot;
+
+    def __init__(self, learning_rate=0.1, initial_value=0.0):
+        self.learning_rate = learning_rate  # α (alpha)
+        self.value = initial_value
+        self.value_history = [initial_value]
+
+    #tutorial assignment:
+    #Update value according to the discrete Rescorla-Wagner rule.
+    def update_value(self, reward, reward_magnitude=1.0):
+        #Your code here
+
+
+
+    def reset(self, initial_value=0.0):
+        &quot;&quot;&quot;Reset agent to initial state.&quot;&quot;&quot;
+    #Your code here
+
+
+
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-two-armed-bandit-environment">
+<h3>The Two-Armed Bandit Environment<a class="headerlink" href="#the-two-armed-bandit-environment" title="Link to this heading">#</a></h3>
+<p>This is a simple task where an agent must choose between two slot machines (‘arms’), each with a different probability of giving a reward.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>class TwoArmedBandit:
+    &quot;&quot;&quot;Two-armed bandit environment with different reward probabilities.&quot;&quot;&quot;
+
+    def __init__(self, arm1_prob=0.7, arm2_prob=0.3, reward_magnitude=1.0):
+        self.arm1_prob = arm1_prob
+        self.arm2_prob = arm2_prob
+        self.reward_magnitude = reward_magnitude
+
+    def pull_arm(self, arm):
+        &quot;&quot;&quot;Pull specified arm and return reward.&quot;&quot;&quot;
+        if arm == 0:
+            prob = self.arm1_prob
+        else:
+            prob = self.arm2_prob
+
+        return self.reward_magnitude if np.random.random() &lt; prob else 0.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-3-generating-the-behavioral-dataset">
+<h2>Step 3: Generating the Behavioral Dataset<a class="headerlink" href="#step-3-generating-the-behavioral-dataset" title="Link to this heading">#</a></h2>
+<p>Now we’ll simulate agents playing the bandit task. This function will be our data generator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def generate_bandit_dataset(n_trials=100, n_agents=50, learning_rate=0.1,
+                           arm1_prob=0.7, arm2_prob=0.3, reward_magnitude=1.0,
+                           exploration_rate=0.1):
+    &quot;&quot;&quot;Generate bandit task dataset with Rescorla-Wagner learning.&quot;&quot;&quot;
+    bandit = TwoArmedBandit(arm1_prob, arm2_prob, reward_magnitude)
+    data = []
+
+    for agent_id in range(n_agents):
+        # Each agent is a new instance with its own history
+        agent = RescorlaWagnerAgent(learning_rate=learning_rate)
+
+        for trial in range(n_trials):
+            # Choose action (ε-greedy with exploration)
+            if np.random.random() &lt; exploration_rate:
+                action = np.random.choice([0, 1]) # Explore
+            else:
+                action = 0 if agent.value &gt; 0.5 else 1 # Exploit (simplified policy)
+
+            # Get reward from the environment
+            reward = bandit.pull_arm(action)
+
+            # Agent updates its internal value
+            # Note: reward_magnitude is the max possible reward, not the actual reward received
+            agent.update_value(reward, reward_magnitude=reward_magnitude)
+
+            data.append({
+                &#39;agent_id&#39;: agent_id,
+                &#39;trial&#39;: trial,
+                &#39;action&#39;: action,
+                &#39;reward&#39;: reward,
+                &#39;value&#39;: agent.value,
+                &#39;learning_rate&#39;: learning_rate,
+                &#39;reward_magnitude&#39;: reward_magnitude
+            })
+
+    return pd.DataFrame(data)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Set our experimental parameters
+n_trials = 200
+n_agents = 50
+true_alpha = 0.15  # This is the learning rate we want to recover
+true_lambda = 0.7    # This is the reward magnitude we want to recover
+
+# Generate the dataset
+data = generate_bandit_dataset(
+    n_trials=n_trials,
+    n_agents=n_agents,
+    learning_rate=true_alpha,
+    reward_magnitude=true_lambda
+)
+
+print(f&quot;Dataset generated with {len(data)} total entries.&quot;)
+print(&quot;First 5 rows of the dataset:&quot;)
+data.head()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span>def apply_sindy_to_recover_parameters(data, agent_id=0):
+    &quot;&quot;&quot;Apply SINDy to recover Rescorla-Wagner parameters from agent data.&quot;&quot;&quot;
+    agent_data = data[data[&#39;agent_id&#39;] == agent_id].sort_values(&#39;trial&#39;)
+
+    # Prepare data for SINDy: time and the state variable (V)
+     #Your code here
+
+    # 1. Define how to calculate the derivative from data
+     #Your code here
+
+    # 2. Define the library of possible functions (we expect a constant and a linear term)
+     #Your code here
+
+    # 3. Define the sparse optimizer
+     #Your code here
+
+    # 4. Build and fit the SINDy model
+     #Your code here
+
+
+    # 5. Extract coefficients and solve for RW parameters
+     #Your code here
+
+    return {
+        &#39;model&#39;: model,
+        &#39;coefficients&#39;: coefficients,
+        &#39;recovered_alpha&#39;: recovered_alpha,
+        &#39;recovered_lambda&#39;: recovered_lambda,
+        &#39;time&#39;: time,
+        &#39;value&#39;: value
+    }
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Apply SINDy to recover parameters
+agent_id_to_analyze = 0
+sindy_results = apply_sindy_to_recover_parameters(data, agent_id_to_analyze)
+
+print(&quot;SINDy Parameter Recovery Results:&quot;)
+print(f&quot;Recovered α (learning rate): {sindy_results[&#39;recovered_alpha&#39;]:.4f}&quot;)
+print(f&quot;Recovered λ (reward magnitude): {sindy_results[&#39;recovered_lambda&#39;]:.4f}&quot;)
+print(f&quot;True α: {true_alpha:.4f}&quot;)
+print(f&quot;True λ: {true_lambda:.4f}&quot;)
+print(f&quot;Error in α: {abs(sindy_results[&#39;recovered_alpha&#39;] - true_alpha):.4f}&quot;)
+print(f&quot;Error in λ: {abs(sindy_results[&#39;recovered_lambda&#39;] - true_lambda):.4f}&quot;)
+
+# Print the discovered equation
+print(f&quot;\nSINDy discovered equation:&quot;)
+print(f&quot;dV/dt = {sindy_results[&#39;recovered_alpha&#39;]:.4f} * ({sindy_results[&#39;recovered_lambda&#39;]:.4f} - V)&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span># Visualize the results
+plt.figure(figsize=(15, 5))
+
+# Plot 1: Learning trajectory
+plt.subplot(1, 3, 1)
+plt.plot(sindy_results[&#39;time&#39;], sindy_results[&#39;value&#39;], &#39;b-&#39;, linewidth=2, label=&#39;Observed Value&#39;)
+plt.axhline(y=true_lambda, color=&#39;r&#39;, linestyle=&#39;--&#39;, label=f&#39;True λ = {true_lambda}&#39;)
+plt.xlabel(&#39;Trial&#39;)
+plt.ylabel(&#39;Value (V)&#39;)
+plt.title(&#39;Learning Trajectory&#39;)
+plt.legend()
+plt.grid(True, alpha=0.3)
+
+# Plot 2: Parameter comparison
+plt.subplot(1, 3, 2)
+methods = [&#39;True&#39;, &#39;SINDy&#39;]
+alpha_values = [true_alpha, sindy_results[&#39;recovered_alpha&#39;]]
+lambda_values = [true_lambda, sindy_results[&#39;recovered_lambda&#39;]]
+
+x = np.arange(len(methods))
+width = 0.35
+
+plt.bar(x - width/2, alpha_values, width, label=&#39;α (learning rate)&#39;, alpha=0.8)
+plt.bar(x + width/2, lambda_values, width, label=&#39;λ (reward magnitude)&#39;, alpha=0.8)
+plt.xlabel(&#39;Method&#39;)
+plt.ylabel(&#39;Parameter Value&#39;)
+plt.title(&#39;Parameter Recovery&#39;)
+plt.xticks(x, methods)
+plt.legend()
+plt.grid(True, alpha=0.3)
+
+# Plot 3: SINDy model equation
+plt.subplot(1, 3, 3)
+equation_text = f&quot;SINDy Discovered Equation:\n\ndV/dt = {sindy_results[&#39;recovered_alpha&#39;]:.4f} * ({sindy_results[&#39;recovered_lambda&#39;]:.4f} - V)\n\nTrue Equation:\ndV/dt = {true_alpha:.4f} * ({true_lambda:.4f} - V)&quot;
+plt.text(0.1, 0.5, equation_text, fontsize=12, verticalalignment=&#39;center&#39;,
+         bbox=dict(boxstyle=&quot;round,pad=0.3&quot;, facecolor=&quot;lightblue&quot;))
+plt.xlim(0, 1)
+plt.ylim(0, 1)
+plt.title(&#39;Model Comparison&#39;)
+plt.axis(&#39;off&#39;)
+
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/practical-sessions/sindy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright © 2025.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
